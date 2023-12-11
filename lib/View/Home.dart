@@ -9,10 +9,12 @@ class Home extends StatelessWidget
         child: const Row(
             mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Text('جستجو در دیجی کالا',style: TextStyle(fontSize: 20),),
+            Text("دیجی کالا",style: TextStyle(fontSize: 25,color: Colors.red),),
+            SizedBox(width: 10,),
+            Text('جستجو در ',style: TextStyle(fontSize: 20,color: Colors.grey),),
             // Add spacing between the icon and text
             SizedBox(width: 10),
-            Icon(Icons.search),
+            Icon(Icons.search,color: Colors.grey,),
           ],
         ),
       ),
