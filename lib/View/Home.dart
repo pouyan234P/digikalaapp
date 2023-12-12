@@ -68,7 +68,7 @@ class MyHome extends StatelessWidget{
               height: 20,
             ),
             slider(),
-
+            showmycompany(),
           ],
         )
       ),
@@ -88,10 +88,14 @@ class slider extends StatefulWidget {
 class myslider extends State<slider> {
   @override
   Widget build(BuildContext context) {
+    List<String> myimage=
+        [
+          'assets/images/firstpicturesaved.jpeg',
+          'assets/images/secondpicturesaved.jpeg'
+        ];
    return CarouselSlider(
       options: CarouselOptions(
         height: 200.0, // Height of the carousel
-        aspectRatio: 16 / 9, // Aspect ratio of the slides
         viewportFraction: 0.8, // Fraction of the screen to occupy
         initialPage: 0, // Initial page index
         enableInfiniteScroll: true, // Enables infinite scrolling
@@ -105,18 +109,147 @@ class myslider extends State<slider> {
 
         scrollDirection: Axis.horizontal,
       ),
-      items: [1, 2, 3, 4, 5].map((i) {
+      items: myimage.map((imageurl) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
-              width: MediaQuery.of(context).size.width, // Full width container
-              margin: EdgeInsets.symmetric(horizontal: 5.0), // Horizontal margin
-              decoration: BoxDecoration(color: Colors.amber), // Amber background
-              child: Text('Text $i', style: TextStyle(fontSize: 16.0)), // Text widget with index
+              width: MediaQuery.of(context).size.width, // Full width container // Horizontal margin
+                height: 500,
+              child:Column(
+
+                children: [
+                  Image.asset(
+                      imageurl,
+                  )
+                ],
+              )
             );
           },
         );
       }).toList(),
     );
   }
+}
+class showmycompany extends StatelessWidget
+{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      child: Column(
+
+        children: [
+        Directionality(
+        textDirection: TextDirection.rtl,
+          child:Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              TextButton(
+                  onPressed: (){}, child:  Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15), // Image radius
+                    child: Image.asset('assets/images/digijet.png',height: 60,),
+                  ),
+                  const Text('دیجی کالا جت')
+                ],
+              ),
+              ),
+              TextButton(
+                onPressed: (){}, child:  Column(
+
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15), // Image radius
+                    child: Image.asset('assets/images/digipay.png',height: 60,),
+                  ),
+                  const Text('دریافت وام')
+                ],
+              ),
+              ),
+              TextButton(
+                onPressed: (){}, child:  Column(
+
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15), // Image radius
+                    child: Image.asset('assets/images/digistyle.png',height: 60,),
+                  ),
+                  Text('حراج استایل')
+                ],
+              ),
+              ),
+              TextButton(
+                onPressed: (){}, child:  Column(
+
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15), // Image radius
+                    child: Image.asset('assets/images/supermarket.png',height: 60,),
+                  ),
+                  Text('سوپرمارکت')
+                ],
+              ),
+              ),
+            ],
+          ) ,
+        ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child:Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: (){}, child:  Column(
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15), // Image radius
+                      child: Image.asset('assets/images/gamenet.png',height: 60,),
+                    ),
+                    const Text('گیم نت')
+                  ],
+                ),
+                ),
+                TextButton(
+                  onPressed: (){}, child:  Column(
+
+                  children: [
+                      ClipRRect(
+                      borderRadius: BorderRadius.circular(15), // Image radius
+                      child: Image.asset('assets/images/digiplus.png',height: 60,),
+                    ),
+                    const Text('دیجی پلاس')
+                  ],
+                ),
+                ),
+                TextButton(
+                  onPressed: (){}, child:  Column(
+
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(15), // Image radius
+                      child: Image.asset('assets/images/digifast.png',height: 60,),
+                    ),
+                    Text('ارسال سریع')
+                  ],
+                ),
+                ),
+                TextButton(
+                  onPressed: (){}, child: const Column(
+
+                  children: [
+                    Icon(Icons.ac_unit_sharp),
+                    Text('data')
+                  ],
+                ),
+                ),
+              ],
+            ) ,
+          ),
+        ],
+      ),
+    );
+  }
+
 }
