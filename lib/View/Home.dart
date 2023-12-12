@@ -139,6 +139,7 @@ class showmycompany extends StatelessWidget
       child: Column(
 
         children: [
+          //retrrtretertert
         Directionality(
         textDirection: TextDirection.rtl,
           child:Row(
