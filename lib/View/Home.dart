@@ -75,6 +75,7 @@ class MyHome extends StatelessWidget{
             advirtisment(),
             Advirtismentsomeproduct(),
             Advirtismentmarket(),
+            categoryplace(),
           ],
                   ),
         )
@@ -579,7 +580,7 @@ class Advirtismentmarket extends StatefulWidget {
     return advirtismentmarketstate();
   }
 }
-  class advirtismentmarketstate extends State<Advirtismentmarket>
+class advirtismentmarketstate extends State<Advirtismentmarket>
   {
   @override
   Widget build(BuildContext context) {
@@ -822,6 +823,178 @@ class Advirtismentmarket extends StatefulWidget {
     ),
     );
   }
+  }
+  class categoryplace extends StatelessWidget
+  {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Container(
+      child:
+       Column(
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          const Text('خرید بر اساس دسته بندی',style: TextStyle(fontSize: 17,color: Colors.black),),
+          const SizedBox(
+            height: 15,
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(onPressed: () {},
+                child:
+                Column(children:[
+                Image.asset('assets/images/mobilecategory.png',width:MediaQuery.of(context).size.width*.25),
+                  const Text('موبایل'),
+                ],
+                ),
+                ),
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/kalacategor.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('کالای دیجیتال'),
+                  ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/kitchencategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('خانه و اشپزخانه'),
+                  ],
+                  ),
+                ),
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/modelandclothscatagory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('مد و پوشاک'),
+                  ],
+                  ),
+                ),
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/supermarketcategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('کالاهای '
+                        'سوپرمارکتی'),
+                  ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/bookscategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('کتاب لوازم تحریر\n        و هنر'),
+                  ],
+                  ),
+                ),
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/toyscategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('اسباب بازی کودک\n         و نوزاد'),
+                  ],
+                  ),
+                ),
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/beautycategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('زیبایی و '
+                        'سلامت'),
+                  ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/sportandtravelcategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('ورزش و سفر'),
+                  ],
+                  ),
+                ),
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/abzaryandtajehjatcategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('ابزار آلات و\n  تجهیزات'),
+                  ],
+                  ),
+                ),
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/carandmotorcekletcategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('خودرو و\n '
+                        'موتورسیکلت'),
+                  ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/bomiproductcategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('محصولات بومی و\n          محلی'),
+                  ],
+                  ),
+                ),
+                TextButton(onPressed: () {},
+                  child:
+                  Column(children:[
+                    Image.asset('assets/images/giftcardcategory.png',width:MediaQuery.of(context).size.width*.25),
+                    const Text('کارت هدیه'),
+                  ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          )
+        ],
+      ),
+    );
+  }
+
   }
 
 
