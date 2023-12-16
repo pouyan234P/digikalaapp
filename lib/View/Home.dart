@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 class Home extends StatelessWidget
@@ -62,15 +64,21 @@ class MyHome extends StatelessWidget{
   Widget build(BuildContext context) {
     return  MaterialApp(
       home: Center(
-        child: Column(
+        child:SingleChildScrollView(
+          child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             slider(),
             showmycompany(),
+            advirtisment(),
+            Advirtismentsomeproduct(),
+            Advirtismentmarket(),
           ],
+                  ),
         )
+
       ),
       debugShowCheckedModeBanner: false,
     );
@@ -80,7 +88,7 @@ class MyHome extends StatelessWidget{
 class slider extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-     const SizedBox(width: 250,);
+      const SizedBox(width: 250,);
    return myslider();
   }
 }
@@ -106,7 +114,6 @@ class myslider extends State<slider> {
         autoPlayCurve: Curves.fastOutSlowIn, // Autoplay animation curve
         enlargeCenterPage: true, // Enlarges the current page
         enlargeFactor: 0.3, // Enlargement factor for the current page
-
         scrollDirection: Axis.horizontal,
       ),
       items: myimage.map((imageurl) {
@@ -254,3 +261,567 @@ class showmycompany extends StatelessWidget
   }
 
 }
+class advirtisment extends StatefulWidget
+{
+  @override
+  State<StatefulWidget> createState() {
+    return advirtismentstate();
+  }
+}
+class advirtismentstate extends State<advirtisment>
+{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return
+      Center(child:  Container(
+               decoration: const BoxDecoration(color: Colors.red),
+               height: MediaQuery.of(context).size.height*.35,
+               child:
+               Directionality(textDirection: TextDirection.rtl,
+               child: ListView(
+                 padding: const EdgeInsets.all(25),
+                 scrollDirection: Axis.horizontal,
+                 children:    [
+
+                   Row(
+                     children: [
+                       Container(margin: EdgeInsets.only(top: 20) ,
+                       child: Column(
+                         
+                         children: [
+                           Image.asset('assets/images/Amazings.jpeg',height: 60,),
+                           Image.asset('assets/images/box.jpeg',height: 80,),
+                           TextButton(onPressed: (){}, child:
+                           Text('مشاهده همه',style: TextStyle(fontSize: 15),))
+
+                         ],
+                       ),
+                       ),
+                        Container(
+                          width: MediaQuery.of(context).size.width*.35,
+                          height: MediaQuery.of(context).size.height*.3,
+                          child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                                                 ),
+                        ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width*.35,
+                         height: MediaQuery.of(context).size.height*.3,
+                         child: Card(
+                           child: Container(
+                             padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                             child: Column(
+                               children: [
+                                 Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                                 const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                 const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                                 const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                               ],
+                             ),
+                           ),
+                         ),
+                       ),
+                     ],
+                   ),
+                 ],
+               )
+                 ,),
+         ),
+    );
+  }
+
+}
+class Advirtismentsomeproduct extends StatelessWidget
+{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Column(
+      children:[
+        const SizedBox(
+          height: 15,
+        ),
+        Container(
+          margin: const EdgeInsets.only(left: 20,right: 20),
+          child:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child:
+                Image.asset('assets/images/part1.jpeg',width: MediaQuery.of(context).size.width*.43,),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child:
+                Image.asset('assets/images/part2.jpeg',width: MediaQuery.of(context).size.width*.43,),
+              ),
+            ],
+          ),
+
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Container(
+          margin: const EdgeInsets.only(left: 20,right: 20),
+          child:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child:
+                Image.asset('assets/images/part3.jpeg',width: MediaQuery.of(context).size.width*.43,),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child:
+                Image.asset('assets/images/part4.jpeg',width: MediaQuery.of(context).size.width*.43,),
+              ),
+            ],
+          ),
+
+        ),
+        const SizedBox(
+          height: 20,
+        )
+      ],
+    );
+  }
+}
+class Advirtismentmarket extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return advirtismentmarketstate();
+  }
+}
+  class advirtismentmarketstate extends State<Advirtismentmarket>
+  {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return
+      Center(child:
+      Container(
+      decoration: const BoxDecoration(color: Colors.lightGreen),
+      height: MediaQuery.of(context).size.height*.35,
+      child:
+      Directionality(textDirection: TextDirection.rtl,
+        child: ListView(
+          padding: const EdgeInsets.all(25),
+          scrollDirection: Axis.horizontal,
+          children:    [
+
+            Row(
+              children: [
+                Container(margin: EdgeInsets.only(top: 20) ,
+                  child: Column(
+
+                    children: [
+                      Image.asset('assets/images/Amazings.jpeg',height: 60,),
+                      Image.asset('assets/images/box.jpeg',height: 80,),
+                      TextButton(onPressed: (){}, child:
+                      Text('مشاهده همه',style: TextStyle(fontSize: 15),))
+
+                    ],
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width*.35,
+                  height: MediaQuery.of(context).size.height*.3,
+                  child: Card(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 30,left: 10,right: 10),
+                      child: Column(
+                        children: [
+                          Image.asset('assets/images/advertisment1.png',width: 60,height: 80,),
+                          const Text('گوشی موبایل جی پلاس مدل Q20 دو سیم کارت',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                          const Text('ارسال امروز',style: TextStyle(fontSize: 12.5)),
+                          const Text(' ۳,۲۹۹,۰۰۰ تومان',style: TextStyle(fontSize: 12.15))
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        )
+        ,),
+    ),
+    );
+  }
+  }
+
+
