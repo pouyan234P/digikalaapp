@@ -1,46 +1,64 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-class Home extends StatelessWidget
+
+import 'Category.dart';
+class Home extends StatefulWidget
+{
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return Homestate();
+  }
+
+
+}
+class Homestate extends State<Home>
 {
   @override
   Widget build(BuildContext context) {
+    int _index = 0;
     return Scaffold(
-      appBar:AppBar(title:  FractionallySizedBox(
+      appBar:AppBar(title:
+      FractionallySizedBox(
         widthFactor: 1.05,
         child:
-      TextButton(
-        style: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color(0xFFF0F0F1)),
+        TextButton(
+          style: ButtonStyle(backgroundColor: MaterialStateProperty.all(const Color(0xFFF0F0F1)),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10),
               ),
             ),
-        ),
-        onPressed: () {},
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text("دیجی کالا",style: TextStyle(fontSize: 25,color: Colors.red),),
-            SizedBox(width: 10,),
-            Text('جستجو در ',style: TextStyle(fontSize: 20,color: Colors.grey),),
-            // Add spacing between the icon and text
-            SizedBox(width: 10),
-            Icon(Icons.search,color: Colors.grey,),
-          ],
-        ),
+          ),
+          onPressed: () {},
+          child: const Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text("دیجی کالا",style: TextStyle(fontSize: 25,color: Colors.red),),
+              SizedBox(width: 10,),
+              Text('جستجو در ',style: TextStyle(fontSize: 20,color: Colors.grey),),
+              // Add spacing between the icon and text
+              SizedBox(width: 10),
+              Icon(Icons.search,color: Colors.grey,),
+            ],
+          ),
 
-      ),
+        ),
       ) ,
       ),
       body: MyHome(),
-      bottomNavigationBar:BottomNavigationBar
+      bottomNavigationBar:
+      BottomNavigationBar
         (
+        currentIndex: _index,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.supervisor_account_rounded),
-          label: 'Profile',
-          backgroundColor: Colors.white70),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.supervisor_account_rounded),
+              label: 'Profile',
+              backgroundColor: Colors.white70),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),
               label: 'Shoppingcart',
               backgroundColor: Colors.white70),
@@ -50,9 +68,34 @@ class Home extends StatelessWidget
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
-              backgroundColor: Colors.white70
+              backgroundColor: Colors.white70,
+              activeIcon: Icon(Icons.home,size: 55,)
           ),
         ],
+        onTap: (int index){
+          setState(() {
+            switch (index) {
+              case 3:
+                {
+                  //Home Page;
+                  Navigator.pushNamed(context,'/');
+                  break;
+                }
+              case 2:
+                {
+                  //Account Page;
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context,'/category');
+                  break;
+                }
+              case 2:
+                {
+                  //Shopping Basket Page;
+                  break;
+                }
+            }
+          });
+        },
       ),
     );
   }
@@ -280,7 +323,8 @@ class advirtismentstate extends State<advirtisment>
                height: MediaQuery.of(context).size.height*.35,
                child:
                Directionality(textDirection: TextDirection.rtl,
-               child: ListView(
+               child:
+               ListView(
                  padding: const EdgeInsets.all(25),
                  scrollDirection: Axis.horizontal,
                  children:    [

@@ -1,3 +1,4 @@
+import 'package:digikalaapp/View/Category.dart';
 import 'package:flutter/material.dart';
 import 'View/Home.dart';
 void main()
@@ -13,7 +14,8 @@ class Myapp extends StatelessWidget
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/':(context)=>Home()
+        '/':(context)=>Home(),
+        '/category':(context)=>category(),
       },
       debugShowCheckedModeBanner: false,
     );
