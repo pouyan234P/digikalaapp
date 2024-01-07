@@ -88,10 +88,15 @@ class Homestate extends State<Home>
                   Navigator.pushNamed(context,'/category');
                   break;
                 }
-              case 2:
+              case 1:
                 {
                   //Shopping Basket Page;
                   break;
+                }
+              case 0:
+                {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/profile');
                 }
             }
           });
@@ -333,7 +338,7 @@ class advirtismentstate extends State<advirtisment>
                      children: [
                        Container(margin: EdgeInsets.only(top: 20) ,
                        child: Column(
-                         
+
                          children: [
                            Image.asset('assets/images/Amazings.jpeg',height: 60,),
                            Image.asset('assets/images/box.jpeg',height: 80,),
