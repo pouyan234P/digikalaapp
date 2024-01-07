@@ -1,7 +1,7 @@
-import 'package:digikalaapp/View/Category.dart';
-import 'package:digikalaapp/View/Profile.dart';
+import 'package:digikalaapp/Feature/Category/Presentation/Widget/Category.dart';
+import 'package:digikalaapp/Feature/Profile/Presentation/Widget/Profile.dart';
 import 'package:flutter/material.dart';
-import 'View/Home.dart';
+import 'Feature/Home/Presentation/Widget/Home.dart';
 void main()
 {
   runApp(Myapp());

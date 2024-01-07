@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import 'Category.dart';
+import '../../../Category/Presentation/Widget/Category.dart';
 class Home extends StatefulWidget
 {
   @override
