@@ -21,7 +21,9 @@ class Homestate extends State<Home>
   Widget build(BuildContext context) {
     int _index = 0;
     return Scaffold(
-      appBar:AppBar(title:
+      appBar:
+      AppBar(
+        title:
       FractionallySizedBox(
         widthFactor: 1.05,
         child:
