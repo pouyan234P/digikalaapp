@@ -1,3 +1,4 @@
+import 'package:digikalaapp/Feature/Product/Domain/Entity/ProductEntity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -176,9 +177,10 @@ class ListProduct extends StatefulWidget
 }
 class ListProductstate extends State<ListProduct>
 {
-  List<String> data = ["Item 1", "Item 2", "Item 3"];
+
   @override
   Widget build(BuildContext context) {
+    List<ProductEntity> data = ModalRoute.of(context)?.settings.arguments as List<ProductEntity>;
     Size size=MediaQuery.of(context).size;
     // TODO: implement build
     return  Directionality(
