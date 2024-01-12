@@ -1,4 +1,5 @@
 
+import 'package:digikalaapp/Feature/Product/Domain/Entity/ProductEntity.dart';
 import 'package:digikalaapp/Feature/Product/Domain/Usecase/get_CategorySearch.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/remote_category_bloc.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/remote_category_state.dart';
@@ -12,7 +13,6 @@ import '../Bloc/Categorybloc/remote/remote_category_event.dart';
 
 class category extends StatefulWidget
 {
-  final myBloc = GetIt.instance<RemoteCategoryBloc>();
 
   @override
   State<StatefulWidget> createState() {
@@ -118,15 +118,17 @@ class mycategory extends StatefulWidget
 }
 class mycategorystate extends State<mycategory>
 {
-  final RemoteCategoryBloc yourBloc = GetIt.I<RemoteCategoryBloc>();
+  final RemoteCategoryBloc yourBloc =s1<RemoteCategoryBloc>();
   @override
   Widget build(BuildContext context) {
+    var t=context;
     // TODO: implement build
     Size size=MediaQuery.of(context).size;
     // TODO: implement build
     return MaterialApp(
       home:
-      BlocProvider(
+
+      BlocProvider<RemoteCategoryBloc>(
         create: (context)=>yourBloc,
         child: SafeArea(
           child: SingleChildScrollView(
@@ -134,9 +136,9 @@ class mycategorystate extends State<mycategory>
               margin: EdgeInsets.symmetric(horizontal: size.width*.05,vertical: size.height*.02),
               child:
               Column(
-
+        
                 children: [
-
+        
                   Directionality(
                     textDirection: TextDirection.rtl,
                     child:
@@ -173,23 +175,27 @@ class mycategorystate extends State<mycategory>
                     child: Row(
                       children: [
                         BlocListener<RemoteCategoryBloc,RemoteCategoryState>(
-                          listener: (context, state) {
-                            if (state is RemoteCategoryLoading) {
-                              // Display a loading indicator
-                            } else if (state is RemoteCategoryDone) {
-                              Navigator.pushNamed(context, '/Product',arguments:state.categoryproduct);
-                            } else if (state is RemoteCategoryError) {
-                              // Display an error message
-                            }
-                          },
+                          listener: (context,state)
+                        {
+                        if (state is RemoteCategoryDone && state.categoryproduct!=null) {
+                        // Handle the successful response
+                          List<ProductEntity> data=state.categoryproduct!;
+                        Navigator.pushNamed(t, '/Product',arguments: data!,);
+                        }
+                        else if (state is RemoteCategoryError)
+                        {
+                        // Handle the failed response
+                        print("Failed to fetch product: ${state.error}");
+                        };
+                        },
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
                                 yourBloc.add(const GetCategoryProductEvent('موبایل'));
                               });
-                          
+        
                             },
-                          
+        
                             child: Card(
                                 child:
                                 Column(
@@ -203,8 +209,8 @@ class mycategorystate extends State<mycategory>
                             ),
                           ),
                         ),
-
-
+        
+        
                         Card(
                             child:
                             Column(
@@ -216,7 +222,7 @@ class mycategorystate extends State<mycategory>
                               ],
                             )
                         ),
-
+        
                       ],
                     ),
                   ),
@@ -259,10 +265,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -426,10 +432,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -593,10 +599,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -760,10 +766,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -927,10 +933,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -1094,10 +1100,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -1261,10 +1267,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -1428,10 +1434,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -1595,10 +1601,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -1762,10 +1768,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -1929,10 +1935,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [
@@ -2096,10 +2102,10 @@ class mycategorystate extends State<mycategory>
                     child: SizedBox(
                       height: size.height*.25,
                       child: ListView(
-
+        
                         scrollDirection: Axis.horizontal,
                         children:    [
-
+        
                           Card(
                             child: Column(
                               children: [

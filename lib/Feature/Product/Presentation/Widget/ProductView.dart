@@ -2,10 +2,13 @@ import 'package:digikalaapp/Feature/Product/Domain/Entity/ProductEntity.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+List<ProductEntity>? data;
 class Productview extends StatelessWidget
 {
+
   @override
   Widget build(BuildContext context) {
+    data = ModalRoute.of(context)!.settings.arguments as List<ProductEntity>;
     // TODO: implement build
     return Scaffold(
 
@@ -180,10 +183,13 @@ class ListProductstate extends State<ListProduct>
 
   @override
   Widget build(BuildContext context) {
-    List<ProductEntity> data = ModalRoute.of(context)?.settings.arguments as List<ProductEntity>;
+
+
     Size size=MediaQuery.of(context).size;
     // TODO: implement build
-    return  Directionality(
+
+
+    return Directionality(
       textDirection: TextDirection.rtl,
       child: Column(
         children: [
@@ -194,7 +200,7 @@ class ListProductstate extends State<ListProduct>
           ),
           ListView.builder(
             shrinkWrap: true,
-            itemCount: data.length,
+            itemCount:data?.length,
               itemBuilder: (context,index) {
                 return const Row(
                   children: [
@@ -206,7 +212,7 @@ class ListProductstate extends State<ListProduct>
                             fontSize: 20
                         ),
                         ),
-                        Text("data", style:
+                        Text(data[index].name", style:
                         TextStyle(
                             fontSize: 20
                         ),

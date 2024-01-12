@@ -13,16 +13,16 @@ class ProductEntity extends Equatable
   final List<dynamic> ? pictures;
   final String ? nameforushghah;
    ProductEntity({
-     required  this.id,
-     required this.informationid,
-     required this.categoryid,
-     required this.name,
-     required this.insurance,
-     required this.price,
-     required this.color,
-     required this.mainpictureUrlID,
-     required this.pictures,
-     required this.nameforushghah
+       this.id,
+      this.informationid,
+      this.categoryid,
+      this.name,
+      this.insurance,
+      this.price,
+      this.color,
+      this.mainpictureUrlID,
+      this.pictures,
+      this.nameforushghah
 });
 
   @override

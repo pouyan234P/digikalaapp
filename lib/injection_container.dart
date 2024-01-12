@@ -11,8 +11,8 @@ final s1=GetIt.instance;
 Future<void> initialDependencies() async
 {
   s1.registerSingleton<Dio>(Dio());
-  s1.registerSingleton<ProductService>(ProductService(s1()));
-  s1.registerSingleton<CategorySearchRepository>(CategorySearchRepositoryImpl(s1()));
-  s1.registerSingleton<GetCategorySearchUseCase>(GetCategorySearchUseCase(s1()));
-  s1.registerFactory<RemoteCategoryBloc>(() => RemoteCategoryBloc(s1()));
+  s1.registerSingleton<ProductService>(ProductService(s1<Dio>()));
+  s1.registerSingleton<CategorySearchRepository>(CategorySearchRepositoryImpl(s1<ProductService>()));
+  s1.registerSingleton<GetCategorySearchUseCase>(GetCategorySearchUseCase(s1<CategorySearchRepository>()));
+  s1.registerFactory<RemoteCategoryBloc>(() => RemoteCategoryBloc(s1<GetCategorySearchUseCase>()));
 }

@@ -1,26 +1,31 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/cupertino.dart';
 import '../../../../Domain/Entity/ProductEntity.dart';
 import 'package:dio/dio.dart';
 
 abstract class RemoteCategoryState extends Equatable
 {
-  final List<ProductEntity> ? categoryproduct;
-  final DioException ? error;
+  late
+  List<ProductEntity> ?  categoryproduct;
+  late DioException ? error;
 
-  const RemoteCategoryState({this.categoryproduct, this.error});
-  List<Object> get props =>[categoryproduct!,error!];
+   RemoteCategoryState( { this.categoryproduct, this.error});
+  @override
+  List<Object> get props =>[categoryproduct!];
 }
 class RemoteCategoryLoading extends RemoteCategoryState
 {
 
-  const RemoteCategoryLoading();
+   RemoteCategoryLoading({required super.categoryproduct});
 }
-class RemoteCategoryInitial extends RemoteCategoryState {}
+class RemoteCategoryInitial extends RemoteCategoryState {
+  RemoteCategoryInitial();
+}
 class RemoteCategoryDone extends RemoteCategoryState
 {
-  const RemoteCategoryDone(List<ProductEntity> data);
+   RemoteCategoryDone(List<ProductEntity> data):super(categoryproduct: data);
 }
 class RemoteCategoryError extends RemoteCategoryState
 {
-  const RemoteCategoryError(DioException dioException);
+   RemoteCategoryError(DioException dioException):super(error: dioException);
 }
