@@ -3,6 +3,7 @@ import 'package:digikalaapp/Core/Constants/Constants.dart';
 import 'package:digikalaapp/Feature/Product/Data/Model/Userpoint/UserpointModel.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
+
 part 'UserpointService.g.dart';
 
 @RestApi(baseUrl: UserpointUrl)

@@ -1,21 +1,23 @@
 
+import 'package:digikalaapp/Feature/Product/Data/Model/ProductModel.dart';
+import 'package:digikalaapp/Feature/Product/Data/Model/Userpoint/PointofviewModel.dart';
 import 'package:digikalaapp/Feature/Product/Domain/Entity/Userpoint/UserpointEntity.dart';
 
 class UserpointModel extends UserpointEntity
 {
   UserpointModel({
-    id,
-    Pointofiviewid,
-    Userid,
-    Productid
-}):super(id: id,Pointofiviewid: Pointofiviewid,Userid: Userid,Productid: Productid);
+   int ? id,
+    PointofviewModel ? Pointofviewid,
+   int ? Userid,
+   ProductModel ? Productid,
+}):super(id: id,Pointofviewid: Pointofviewid,Userid: Userid,Productid: Productid);
   factory UserpointModel.fromJson(Map< String,dynamic > map)
   {
     return UserpointModel(
       id: map["id"] ?? "",
-      Pointofiviewid: map["pointofiviewid"] ?? "",
+      Pointofviewid: PointofviewModel.fromJson(map["pointofviewid"]),
       Userid: map['userid'] ?? "",
-      Productid: map['productid'] ?? "",
+      Productid:ProductModel.fromJson(map['productid']),
     );
   }
 }

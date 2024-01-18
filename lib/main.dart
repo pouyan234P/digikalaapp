@@ -9,7 +9,6 @@ import 'injection_container.dart';
 Future<void> main()
 async {
   await initialDependencies();
-  Bloc.observer = SimpleBlocObserver();
   runApp(Myapp());
 }
 

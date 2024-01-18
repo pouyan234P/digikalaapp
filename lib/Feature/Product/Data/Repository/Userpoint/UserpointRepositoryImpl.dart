@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:digikalaapp/Core/Resourses/data_state.dart';
 import 'package:digikalaapp/Feature/Product/Data/Data_Source/Remote/Userpoint/UserpointService.dart';
+import 'package:digikalaapp/Feature/Product/Data/Model/Userpoint/UserpointModel.dart';
 import 'package:digikalaapp/Feature/Product/Domain/Entity/Userpoint/UserpointEntity.dart';
 import 'package:digikalaapp/Feature/Product/Domain/Repository/Userpoint/UserPointRepository.dart';
 import 'package:dio/dio.dart';
@@ -11,7 +12,7 @@ class UserpointRepositoryImpl extends UserPointRepository
   UserpointRepositoryImpl(this._service);
 
   @override
-  Future<DataState<List<UserpointEntity>>> GetUserpoints(int? productid) async {
+  Future<DataState<List<UserpointModel>>> GetUserpoints(int? productid) async {
     // TODO: implement GetUserpoints
     try
         {

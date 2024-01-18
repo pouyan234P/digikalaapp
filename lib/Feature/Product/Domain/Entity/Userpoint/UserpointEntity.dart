@@ -5,12 +5,12 @@ import 'package:equatable/equatable.dart';
 class UserpointEntity extends Equatable
 {
   final int ? id;
- final PointofviewEntity ? Pointofiviewid ;
+ final PointofviewEntity ? Pointofviewid ;
  final int ? Userid ;
  final ProductEntity ? Productid ;
   UserpointEntity({
     this.id,
-    this.Pointofiviewid,
+    this.Pointofviewid,
     this.Userid,
     this.Productid
 });
@@ -20,7 +20,7 @@ class UserpointEntity extends Equatable
    return[ id,
     Productid,
     Userid,
-    Pointofiviewid
+    Pointofviewid
     ];
   }
 
