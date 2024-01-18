@@ -1,5 +1,6 @@
 import 'package:digikalaapp/Feature/Product/Presentation/Widget/Category.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Widget/ProductView.dart';
+import 'package:digikalaapp/Feature/Product/Presentation/Widget/SinglepageProduct.dart';
 import 'package:digikalaapp/Feature/Profile/Presentation/Widget/Profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,6 +25,7 @@ class Myapp extends StatelessWidget
         '/category':(context)=>category(),
         '/profile':(context)=>profile(),
         '/Product':(context)=>Productview(),
+        '/Singlepageproduct':(context)=>singlePageproduct(),
       },
       debugShowCheckedModeBanner: false,
     );

@@ -1,5 +1,6 @@
 import 'package:digikalaapp/Feature/Product/Data/Data_Source/Remote/ProductService.dart';
 import 'package:digikalaapp/Feature/Product/Data/Repository/CategorySearchRepositoryImpl.dart';
+import 'package:digikalaapp/Feature/Product/Domain/Entity/ProductEntity.dart';
 import 'package:digikalaapp/Feature/Product/Domain/Repository/CategorySearchRepository.dart';
 import 'package:digikalaapp/Feature/Product/Domain/Usecase/get_CategorySearch.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/remote_category_bloc.dart';
@@ -15,4 +16,6 @@ Future<void> initialDependencies() async
   s1.registerSingleton<CategorySearchRepository>(CategorySearchRepositoryImpl(s1<ProductService>()));
   s1.registerSingleton<GetCategorySearchUseCase>(GetCategorySearchUseCase(s1<CategorySearchRepository>()));
   s1.registerFactory<RemoteCategoryBloc>(() => RemoteCategoryBloc(s1<GetCategorySearchUseCase>()));
+ // s1.registerSingleton<RemoteCategoryBloc>(RemoteCategoryBloc(s1<GetCategorySearchUseCase>()));
+  //s1.registerFactory<RemoteCategoryBloc>(() =>RemoteCategoryBloc.y(s1<GetCategorySearchUseCase>()));
 }

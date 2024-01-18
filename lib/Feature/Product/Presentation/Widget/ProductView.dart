@@ -1,8 +1,16 @@
 import 'package:digikalaapp/Feature/Product/Domain/Entity/ProductEntity.dart';
+import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/remote_category_event.dart';
+import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/remote_category_state.dart';
+import 'package:digikalaapp/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:math' as math;
-List<ProductEntity>? data;
+
+import '../../Domain/Usecase/get_CategorySearch.dart';
+import '../Bloc/Categorybloc/remote/remote_category_bloc.dart';
+List<ProductEntity> ? data;
+
 class Productview extends StatelessWidget
 {
 
@@ -16,24 +24,27 @@ class Productview extends StatelessWidget
     );
   }
 }
+var t;
 class Productbuild extends StatelessWidget
 {
+
   @override
   Widget build(BuildContext context) {
+     t=context;
     Size size=MediaQuery.of(context).size;
     // TODO: implement build
     return  MaterialApp(
       home:
-      SingleChildScrollView(
-        child: Directionality(
-          textDirection: TextDirection.rtl,
+      Directionality(
+        textDirection: TextDirection.rtl,
+        child: SafeArea(
           child: Column(
             children:
             [
               SizedBox(
                 height: size.height*.025,
               ),
-            MyHeader(),
+             MyHeader(),
              Myfilter(),
 
               Container(
@@ -45,7 +56,6 @@ class Productbuild extends StatelessWidget
               Container(
                 height: size.height*.012,
                 color: Colors.grey,
-
               ),
              ListProduct(),
             ],
@@ -183,56 +193,82 @@ class ListProductstate extends State<ListProduct>
 
   @override
   Widget build(BuildContext context) {
-
-
     Size size=MediaQuery.of(context).size;
     // TODO: implement build
-
-
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Column(
-        children: [
+    final RemoteCategoryBloc yourBloc = RemoteCategoryBloc.y(s1<GetCategorySearchUseCase>());
+    return
+      BlocProvider(
+        create: (context)=>yourBloc,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
           const Text("کوشی موبایل",style:
-          TextStyle(
-              fontSize: 20
-          ),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-            itemCount:data?.length,
-              itemBuilder: (context,index) {
-                return const Row(
-                  children: [
-                    //Image.network("src"),
-                    Column(
-                      children: [
-                        Text("ارسال رایکان", style:
-                        TextStyle(
-                            fontSize: 20
-                        ),
-                        ),
-                        Text(data[index].name", style:
-                        TextStyle(
-                            fontSize: 20
-                        ),
-                        ),
-                        Text("ارسال امروز", style:
-                        TextStyle(
-                            fontSize: 20
-                        ),
-                        )
-
-                      ],
-                    ),
-                  ],
-                );
+        TextStyle(
+            fontSize: 12
+        ),
+        ),
+          BlocListener<RemoteCategoryBloc,RemoteCategoryState>(
+            listener: (context,state)
+            {
+              if (state is RemoteProductDone) {
+                // Handle the successful response
+                Navigator.pushNamed(t, '/Singlepageproduct',arguments: state.takproduct,);
               }
+              else if (state is RemoteCategoryError)
+              {
+                // Handle the failed response
+                print("Failed to fetch product: ${state.error}");
+              }
+            },
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount:data!.length,
+                itemBuilder: (context,index) {
+                  return  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: ListTile(
+                      title:const Text("ارسال رایکان", style:
+                      TextStyle(
+                          fontSize: 11
+                      ),
+                      ) ,
+                      subtitle:
+                      Column(
+                        children: [
+                          SizedBox(
+                            width: size.width*.7,
+                            child: Text(data![index].name!,
+                              style: const TextStyle(
+                                  fontSize: 12.5
+                              ),
+                              softWrap: true,
+                              maxLines: 2, // Set the maximum number of lines to 2
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const Text("ارسال امروز", style:
+                          TextStyle(
+                              fontSize: 20
+                          ),
+                          ),
+                        ],
+                      ),
+                      leading:  SizedBox(
+                        width: size.width*.2,
+                          child: Image.network(data![index].mainpictureUrlID!)),
+                      onTap: (){
+                        yourBloc.add(GetSingleProductEvent(data![index].id!));
+                      },
+                    ),
+                  );
 
-      ),
-      ],
-    )
-    );
+                }
+            ),
+          )
+            ],
+        ),
+      );
 
   }
 

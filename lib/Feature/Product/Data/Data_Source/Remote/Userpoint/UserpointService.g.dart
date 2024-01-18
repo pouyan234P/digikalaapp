@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ProductService.dart';
+part of 'UserpointService.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,12 +8,12 @@ part of 'ProductService.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _ProductService implements ProductService {
-  _ProductService(
+class _UserpointService implements UserpointService {
+  _UserpointService(
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.192.87:4899/api/Product';
+    baseUrl ??= 'http://192.168.192.87:4899/api/Userpoint';
   }
 
   final Dio _dio;
@@ -21,22 +21,22 @@ class _ProductService implements ProductService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<List<ProductModel>>> getProductbyCategory(
-      String? name) async {
+  Future<HttpResponse<List<UserpointModel>>> GetUserpoints(
+      int? productid) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<List<ProductModel>>>(Options(
+        _setStreamType<HttpResponse<List<UserpointModel>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/Getbyserch/${name}',
+              '/GetUserpoints/${productid}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -46,37 +46,8 @@ class _ProductService implements ProductService {
               baseUrl,
             ))));
     var value = _result.data!
-        .map((dynamic i) => ProductModel.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => UserpointModel.fromJson(i as Map<String, dynamic>))
         .toList();
-    final httpResponse = HttpResponse(value, _result);
-    return httpResponse;
-  }
-
-  @override
-  Future<HttpResponse<ProductModel>> getProductbyId(int? id) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<ProductModel>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/GetProductId/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = ProductModel.fromJson(_result.data!);
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

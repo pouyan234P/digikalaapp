@@ -12,4 +12,7 @@ abstract class ProductService
 
   @GET('/Getbyserch/{name}')
   Future<HttpResponse<List<ProductModel>>> getProductbyCategory(@Path('name') String ? name);
+
+  @GET('/GetProductId/{id}')
+  Future<HttpResponse<ProductModel>> getProductbyId(@Path('id')int ? id);
 }

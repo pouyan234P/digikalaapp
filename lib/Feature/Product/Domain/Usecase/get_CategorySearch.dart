@@ -13,4 +13,8 @@ class GetCategorySearchUseCase
     // TODO: implement call
     return await _repository.getProductsbyname(name);
   }
+  Future<DataState<ProductEntity>> calltakproduct(int id) async
+  {
+    return await _repository.getproductbyid(id);
+  }
 }
