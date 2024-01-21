@@ -13,7 +13,7 @@ class _ProductService implements ProductService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://2af8-31-7-98-16.ngrok-free.app/api/Product';
+    baseUrl ??= 'http://192.168.1.102:4899/api/Product';
   }
 
   final Dio _dio;

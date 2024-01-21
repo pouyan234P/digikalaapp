@@ -35,7 +35,9 @@ class Homestate extends State<Home>
               ),
             ),
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/Search');
+          },
           child: const Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [

@@ -5,9 +5,8 @@ import 'package:dio/dio.dart';
 
 abstract class RemoteCategoryState extends Equatable
 {
-  late
-  List<ProductEntity> ?  categoryproduct;
-  ProductEntity ? takproduct;
+  late List<ProductEntity> ?  categoryproduct;
+  late ProductEntity ? takproduct;
   late DioException ? error;
 
    RemoteCategoryState( { this.categoryproduct, this.error});
