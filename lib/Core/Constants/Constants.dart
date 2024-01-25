@@ -1,2 +1,2 @@
-const String UserpointUrl="http://192.168.1.102:4899/api/Userpoint";
-const String ProductUrl="http://192.168.1.102:4899/api/Product";
+const String UserpointUrl="https://43b2-31-7-98-8.ngrok-free.app/api/Userpoint";
+const String ProductUrl="https://43b2-31-7-98-8.ngrok-free.app/api/Product";

@@ -13,7 +13,7 @@ class _searchProductService implements searchProductService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.1.102:4899/api/Product';
+    baseUrl ??= 'https://43b2-31-7-98-8.ngrok-free.app/api/Product';
   }
 
   final Dio _dio;
