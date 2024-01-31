@@ -6,6 +6,6 @@ import '../../../../Core/Resourses/data_state.dart';
 
 abstract class CategorySearchRepository
 {
-  Future<DataState<List<ProductEntity>>> getProductsbyname(String ? name);
+  Future<DataState<List<ProductEntity>>> getProductsbyname(String ? name,int PageNumber);
   Future<DataState<ProductEntity>> getproductbyid(int ? id);
 }

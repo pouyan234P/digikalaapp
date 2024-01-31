@@ -10,7 +10,7 @@ final String ? Name ;
 final double? Price;
 final String ? Picture;
 final String ? Color;
-final int? hashColor ;
+final String? hashColor ;
 const productShoppingEntity({
     this.id,
   this.productid,

@@ -9,13 +9,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class RemoteShoppingBloc extends Bloc<RemoteShoppingEvent,RemoteShoppingState>
 {
   final GetShoppingCartUseCase _cartUseCase;
-  RemoteShoppingBloc(this._cartUseCase):super(RemoteShoppingInitial())
+  RemoteShoppingBloc(this._cartUseCase):super(RemoteShoppingLoading())
   {
     on<GetShoppingEvent>(onGetShoppingcart);
   }
   void onGetShoppingcart(GetShoppingEvent event,Emitter<RemoteShoppingState> emit) async
   {
-    final dataState=await _cartUseCase.callShoppingcart(event.userid);
+    final dataState=await _cartUseCase.callShoppingcart(event.userid,event.PageNumber);
     if(dataState is DataSuccess && dataState.data!.isNotEmpty)
       {
         emit(

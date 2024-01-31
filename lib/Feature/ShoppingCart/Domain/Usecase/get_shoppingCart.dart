@@ -10,8 +10,8 @@ class GetShoppingCartUseCase
   final shoppingRepository _repository;
   GetShoppingCartUseCase(this._repository);
 
-  Future<DataState<List<cartDetailShoppingEntity>>> callShoppingcart(int ? userid) async
+  Future<DataState<List<cartDetailShoppingEntity>>> callShoppingcart(int ? userid, int ?PageNumber) async
   {
-    return await _repository.GetAllShoppingcart(userid);
+    return await _repository.GetAllShoppingcart(userid,PageNumber);
   }
 }

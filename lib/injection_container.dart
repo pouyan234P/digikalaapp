@@ -12,6 +12,11 @@ import 'package:digikalaapp/Feature/Search/Data/Data_Source/Remote/searchProduct
 import 'package:digikalaapp/Feature/Search/Domain/Repository/searchProductRepository.dart';
 import 'package:digikalaapp/Feature/Search/Domain/Usecase/get_searchProduct.dart';
 import 'package:digikalaapp/Feature/Search/Presentation/Bloc/remote/Remote_searchProduct_Bloc.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Data/Data_Source/Remote/shoppingService.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Data/Repository/shoppingRepositoryImpl.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Repository/shoppingRepository.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Usecase/get_shoppingCart.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Bloc/remote/remote_shopping_Bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 
@@ -22,16 +27,20 @@ final s1=GetIt.instance;
 Future<void> initialDependencies() async
 {
   s1.registerSingleton<Dio>(Dio());
-  s1.registerFactory<ProductService>(()=>ProductService(s1<Dio>()));
-  s1.registerFactory<CategorySearchRepository>(()=>CategorySearchRepositoryImpl(s1<ProductService>()));
-  s1.registerFactory<GetCategorySearchUseCase>(()=>GetCategorySearchUseCase(s1<CategorySearchRepository>()));
+  s1.registerSingleton<ProductService>(ProductService(s1<Dio>()));
+  s1.registerSingleton<CategorySearchRepository>(CategorySearchRepositoryImpl(s1<ProductService>()));
+  s1.registerSingleton<GetCategorySearchUseCase>(GetCategorySearchUseCase(s1<CategorySearchRepository>()));
   s1.registerFactory<RemoteCategoryBloc>(() => RemoteCategoryBloc(s1<GetCategorySearchUseCase>()));
   s1.registerSingleton<UserpointService>(UserpointService(s1<Dio>()));
   s1.registerSingleton<UserPointRepository>(UserpointRepositoryImpl(s1<UserpointService>()));
   s1.registerSingleton<GetUserpointUsecase>(GetUserpointUsecase(s1<UserPointRepository>()));
   s1.registerFactory<RemoteUserpointBloc>(() => RemoteUserpointBloc(s1<GetUserpointUsecase>()));
-  s1.registerFactory<searchProductService>(()=>searchProductService(s1<Dio>()));
-  s1.registerFactory<searchProductRepository>(()=>searchProductRepositoryImpl(s1<searchProductService>()));
-  s1.registerFactory<GetsearchProductUseCase>(()=>GetsearchProductUseCase(s1<searchProductRepository>()));
+  s1.registerSingleton<searchProductService>(searchProductService(s1<Dio>()));
+  s1.registerSingleton<searchProductRepository>(searchProductRepositoryImpl(s1<searchProductService>()));
+  s1.registerSingleton<GetsearchProductUseCase>(GetsearchProductUseCase(s1<searchProductRepository>()));
   s1.registerFactory<RemotesearchProductBloc>(() => RemotesearchProductBloc(s1<GetsearchProductUseCase>()));
+  s1.registerSingleton<shoppingService>(shoppingService(s1<Dio>()));
+  s1.registerSingleton<shoppingRepository>(shoppingRepositoryImpl(s1<shoppingService>()));
+  s1.registerSingleton<GetShoppingCartUseCase>(GetShoppingCartUseCase(s1<shoppingRepository>()));
+  s1.registerFactory<RemoteShoppingBloc>(() => RemoteShoppingBloc(s1<GetShoppingCartUseCase>()));
 }

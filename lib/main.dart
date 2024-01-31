@@ -26,19 +26,12 @@ class Myapp extends StatelessWidget
         '/category':(context)=>category(),
         '/profile':(context)=>profile(),
         '/Product':(context)=>Productview(),
-        '/Singlepageproduct':(context)=>singlePageproduct(),
+        '/singlePageproduct':(context)=>singlePageproduct(),
         '/Search':(context)=>SearchUi(),
-        '/Shopping':(context)=>ShoppingUi()
+        '/Shopping':(context)=>ShoppingUi(),
       },
       debugShowCheckedModeBanner: false,
     );
   }
 
-}
-class SimpleBlocObserver extends BlocObserver {
-  @override
-  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
-    super.onError(bloc, error, stackTrace);
-    print('$bloc error: $error');
-  }
 }

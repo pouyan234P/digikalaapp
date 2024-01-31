@@ -9,14 +9,14 @@ import 'dart:math' as math;
 
 import '../../Domain/Usecase/get_CategorySearch.dart';
 import '../Bloc/Categorybloc/remote/remote_category_bloc.dart';
-List<ProductEntity> ? data;
-
+String ? data;
+var t;
 class Productview extends StatelessWidget
 {
-
   @override
   Widget build(BuildContext context) {
-    data = ModalRoute.of(context)!.settings.arguments as List<ProductEntity>;
+    t=context;
+    data = ModalRoute.of(context)!.settings.arguments as String? ?? "";
     // TODO: implement build
     return Scaffold(
 
@@ -24,13 +24,13 @@ class Productview extends StatelessWidget
     );
   }
 }
-var t;
+
 class Productbuild extends StatelessWidget
 {
 
   @override
   Widget build(BuildContext context) {
-     t=context;
+    t=context;
     Size size=MediaQuery.of(context).size;
     // TODO: implement build
     return  MaterialApp(
@@ -44,8 +44,8 @@ class Productbuild extends StatelessWidget
               SizedBox(
                 height: size.height*.025,
               ),
-             MyHeader(),
-             Myfilter(),
+              MyHeader(),
+              Myfilter(),
 
               Container(
                 height: size.height*.012,
@@ -57,7 +57,7 @@ class Productbuild extends StatelessWidget
                 height: size.height*.012,
                 color: Colors.grey,
               ),
-             ListProduct(),
+              ListProduct(),
             ],
           ),
         ),
@@ -112,7 +112,7 @@ class Myfilter extends StatelessWidget
             Row(
               children: [
 
-               Image.asset("assets/images/filter.png",height:size.height*.025,),
+                Image.asset("assets/images/filter.png",height:size.height*.025,),
                 SizedBox(
                   width: size.width*.025,
                 ),
@@ -190,12 +190,39 @@ class ListProduct extends StatefulWidget
 }
 class ListProductstate extends State<ListProduct>
 {
+  final RemoteCategoryBloc yourBloc = s1<RemoteCategoryBloc>();
+  final ScrollController _scrollController = ScrollController();
+
+  int sum=0;
+  @override
+  void initState() {
+    super.initState();
+    //_postBloc = BlocProvider.of<PostBloc>(context);
+    //_postBloc.add(FetchPosts(page: 1, pageSize: 10));
+
+    _scrollController.addListener(_onScroll);
+  }
 
   @override
+
+
+  void _onScroll() {
+    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      // Fetch more posts when reaching the end of the list
+
+      sum++;
+        yourBloc.add( GetCategoryProductEvent(data!,sum));
+
+
+      // _postBloc.add(FetchPosts(page: 2, pageSize: 10));
+    }
+  }
+  @override
   Widget build(BuildContext context) {
+
     Size size=MediaQuery.of(context).size;
     // TODO: implement build
-    final RemoteCategoryBloc yourBloc = RemoteCategoryBloc.y(s1<GetCategorySearchUseCase>());
+
     return
       BlocProvider(
         create: (context)=>yourBloc,
@@ -203,74 +230,80 @@ class ListProductstate extends State<ListProduct>
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-          const Text("کوشی موبایل",style:
-        TextStyle(
-            fontSize: 12
-        ),
-        ),
-          BlocListener<RemoteCategoryBloc,RemoteCategoryState>(
-            listener: (context,state)
-            {
-              if (state is RemoteProductDone) {
-                // Handle the successful response
-                Navigator.pushNamed(t, '/Singlepageproduct',arguments: state.takproduct,);
-              }
-              else if (state is RemoteCategoryError)
-              {
-                // Handle the failed response
-                print("Failed to fetch product: ${state.error}");
-              }
-            },
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount:data!.length,
-                itemBuilder: (context,index) {
-                  return  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: ListTile(
-                      title:const Text("ارسال رایکان", style:
-                      TextStyle(
-                          fontSize: 11
-                      ),
-                      ) ,
-                      subtitle:
-                      Column(
-                        children: [
-                          SizedBox(
-                            width: size.width*.7,
-                            child: Text(data![index].name!,
-                              style: const TextStyle(
-                                  fontSize: 12.5
-                              ),
-                              softWrap: true,
-                              maxLines: 2, // Set the maximum number of lines to 2
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          const Text("ارسال امروز", style:
-                          TextStyle(
-                              fontSize: 20
-                          ),
-                          ),
-                        ],
-                      ),
-                      leading:  SizedBox(
-                        width: size.width*.2,
-                          child: Image.network(data![index].mainpictureUrlID!)),
-                      onTap: (){
-                        yourBloc.add(GetSingleProductEvent(data![index].id!));
-                      },
-                    ),
-                  );
-
-                }
+            const Text("کوشی موبایل",style:
+            TextStyle(
+                fontSize: 12
             ),
-          )
-            ],
+            ),
+           BlocBuilder<RemoteCategoryBloc,RemoteCategoryState>(
+               builder: (context,state){
+                 if(state is RemoteCategoryLoading)
+                   {
+                     sum++;
+                     yourBloc.add( GetCategoryProductEvent(data!,sum));
+                     return CircularProgressIndicator();
+                   }
+                 if(state is RemoteCategoryDone)
+                   {
+
+                     return  SizedBox(
+                       height: size.height*.7,
+                       child: ListView.builder(
+                           shrinkWrap: true,
+                           itemCount:state.categoryproduct!.length,
+                           controller: _scrollController,
+                           itemBuilder: (context,index) {
+                             return  Directionality(
+                               textDirection: TextDirection.rtl,
+                               child: GestureDetector(
+                                 onTap: (){
+                                   Navigator.pushNamed(t,'/singlePageproduct',arguments: state.categoryproduct![index].id!,);
+                                 },
+                                 child: ListTile(
+                                   title:const Text("ارسال رایکان", style:
+                                   TextStyle(
+                                       fontSize: 11
+                                   ),
+                                   ) ,
+                                   subtitle:
+                                   Column(
+                                     children: [
+                                       SizedBox(
+                                         width: size.width*.7,
+                                         child: Text(state.categoryproduct![index].name!,
+                                           style: const TextStyle(
+                                               fontSize: 12.5
+                                           ),
+                                           softWrap: true,
+                                           maxLines: 2, // Set the maximum number of lines to 2
+                                           overflow: TextOverflow.ellipsis,
+                                         ),
+                                       ),
+                                       const Text("ارسال امروز", style:
+                                       TextStyle(
+                                           fontSize: 20
+                                       ),
+                                       ),
+                                     ],
+                                   ),
+                                   leading:  SizedBox(
+                                       width: size.width*.2,
+                                       child: Image.network(state.categoryproduct![index].mainpictureUrlID!)),
+
+                                 ),
+                               ),
+                             );
+
+                           }
+                       ),
+                     );
+                   }
+                 return Container();
+               })
+          ],
         ),
       );
 
   }
 
 }
-

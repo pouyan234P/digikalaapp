@@ -16,10 +16,10 @@ class CategorySearchRepositoryImpl implements CategorySearchRepository
   final ProductService _productService;
   CategorySearchRepositoryImpl(this._productService);
   @override
-  Future<DataState<List<ProductModel>>> getProductsbyname(String ?name) async {
+  Future<DataState<List<ProductModel>>> getProductsbyname(String ?name,int PageNumber) async {
     // TODO: implement getProducts
     try {
-      final httpResponse = await _productService.getProductbyCategory(name);
+      final httpResponse = await _productService.getProductbyCategory(name,PageNumber);
       if (httpResponse.response.statusCode == HttpStatus.ok) {
 
         return DataSuccess(httpResponse.data);

@@ -1,6 +1,7 @@
 
 
-import 'dart:html';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:digikalaapp/Core/Resourses/data_state.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Data/Data_Source/Remote/shoppingService.dart';
@@ -12,10 +13,10 @@ class shoppingRepositoryImpl extends shoppingRepository
   final shoppingService _service;
   shoppingRepositoryImpl(this._service);
   @override
-  Future<DataState<List<cartDetailShoppingModel>>> GetAllShoppingcart(int? userid) async {
+  Future<DataState<List<cartDetailShoppingModel>>> GetAllShoppingcart(int ? userid,int ? PageNumber) async {
     try
         {
-          final httpResponse=await _service.GetAllShoppingcart(userid);
+          final httpResponse=await _service.GetAllShoppingcart(userid,PageNumber);
           if(httpResponse.response.statusCode==HttpStatus.ok)
             {
               return DataSuccess(httpResponse.data);

@@ -11,7 +11,7 @@ abstract class ProductService
   factory ProductService(Dio dio)=_ProductService;
 
   @GET('/Getbyserch/{name}')
-  Future<HttpResponse<List<ProductModel>>> getProductbyCategory(@Path('name') String ? name);
+  Future<HttpResponse<List<ProductModel>>> getProductbyCategory(@Path('name') String ? name,@Query('PageNumber') int PageNumber);
 
   @GET('/GetProductId/{id}')
   Future<HttpResponse<ProductModel>> getProductbyId(@Path('id')int ? id);

@@ -11,5 +11,5 @@ abstract class shoppingService
   factory shoppingService(Dio dio)=_shoppingService;
 
   @GET('/GetAllShoppingcart/{userid}')
-  Future<HttpResponse<List<cartDetailShoppingModel>>> GetAllShoppingcart(@Path('userid') int ? userid);
+  Future<HttpResponse<List<cartDetailShoppingModel>>> GetAllShoppingcart(@Path('userid') int ? userid,@Query('PageNumber') int ? PageNumber);
 }

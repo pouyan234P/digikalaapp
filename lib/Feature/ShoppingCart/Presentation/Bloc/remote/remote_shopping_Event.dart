@@ -7,5 +7,6 @@ abstract class RemoteShoppingEvent
 class GetShoppingEvent extends RemoteShoppingEvent
 {
   final int userid;
-  GetShoppingEvent(this.userid);
+  final int PageNumber;
+  GetShoppingEvent(this.userid,this.PageNumber);
 }

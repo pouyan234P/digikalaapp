@@ -6,5 +6,5 @@ import '../../../../Core/Resourses/data_state.dart';
 
 abstract class shoppingRepository
 {
-  Future<DataState<List<cartDetailShoppingEntity>>> GetAllShoppingcart(int ? userid);
+  Future<DataState<List<cartDetailShoppingEntity>>> GetAllShoppingcart(int ? userid,int ?PageNumber);
 }

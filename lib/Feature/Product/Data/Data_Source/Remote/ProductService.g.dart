@@ -13,7 +13,7 @@ class _ProductService implements ProductService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://43b2-31-7-98-8.ngrok-free.app/api/Product';
+    baseUrl ??= 'http://192.168.1.102:4899/api/Product';
   }
 
   final Dio _dio;
@@ -22,9 +22,11 @@ class _ProductService implements ProductService {
 
   @override
   Future<HttpResponse<List<ProductModel>>> getProductbyCategory(
-      String? name) async {
+    String? name,
+    int PageNumber,
+  ) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'PageNumber': PageNumber};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;

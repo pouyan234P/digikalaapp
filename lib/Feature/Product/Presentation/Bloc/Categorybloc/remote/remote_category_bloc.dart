@@ -8,7 +8,7 @@ import '../../../../Domain/Usecase/get_CategorySearch.dart';
 class RemoteCategoryBloc extends Bloc<RemoteCategoryEvent,RemoteCategoryState> {
   final GetCategorySearchUseCase _getCategorySearchUseCase;
 
-  RemoteCategoryBloc(this._getCategorySearchUseCase): super( RemoteCategoryInitial())
+  RemoteCategoryBloc(this._getCategorySearchUseCase): super( RemoteCategoryLoading())
   {
     on <GetCategoryProductEvent>(onGetCategorySearch);
   }
@@ -18,7 +18,7 @@ class RemoteCategoryBloc extends Bloc<RemoteCategoryEvent,RemoteCategoryState> {
   }
   void onGetCategorySearch(GetCategoryProductEvent event,Emitter<RemoteCategoryState> emit) async
   {
-    final dataState=await _getCategorySearchUseCase.callcategory(event.name);
+    final dataState=await _getCategorySearchUseCase.callcategory(event.name,event.PageNumber);
     if(dataState is DataSuccess && dataState.data!.isNotEmpty)
       {
         emit(
