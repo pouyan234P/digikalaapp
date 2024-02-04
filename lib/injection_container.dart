@@ -1,3 +1,8 @@
+import 'package:digikalaapp/Feature/Login/Data/Data_Source/Remote/registerService.dart';
+import 'package:digikalaapp/Feature/Login/Data/Repository/registerRepositoryImpl.dart';
+import 'package:digikalaapp/Feature/Login/Domain/Repository/registerRepository.dart';
+import 'package:digikalaapp/Feature/Login/Domain/Usecase/get_register_usecase.dart';
+import 'package:digikalaapp/Feature/Login/Presentation/Bloc/Remote/remote_register_Bloc.dart';
 import 'package:digikalaapp/Feature/Product/Data/Data_Source/Remote/ProductService.dart';
 import 'package:digikalaapp/Feature/Product/Data/Data_Source/Remote/Userpoint/UserpointService.dart';
 import 'package:digikalaapp/Feature/Product/Data/Repository/CategorySearchRepositoryImpl.dart';
@@ -43,4 +48,8 @@ Future<void> initialDependencies() async
   s1.registerSingleton<shoppingRepository>(shoppingRepositoryImpl(s1<shoppingService>()));
   s1.registerSingleton<GetShoppingCartUseCase>(GetShoppingCartUseCase(s1<shoppingRepository>()));
   s1.registerFactory<RemoteShoppingBloc>(() => RemoteShoppingBloc(s1<GetShoppingCartUseCase>()));
+  s1.registerSingleton<registerService>(registerService(s1<Dio>()));
+  s1.registerSingleton<registerRepository>(registerRepositoryImpl(s1<registerService>()));
+  s1.registerSingleton<getRegisterUsecase>(getRegisterUsecase(s1<registerRepository>()));
+  s1.registerFactory<remoteRegisterBloc>(() => remoteRegisterBloc(s1<getRegisterUsecase>()));
 }

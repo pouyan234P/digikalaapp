@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'shoppingService.dart';
+part of 'registerService.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,12 +8,12 @@ part of 'shoppingService.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _shoppingService implements shoppingService {
-  _shoppingService(
+class _registerService implements registerService {
+  _registerService(
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.168.87:4899/api/Shopping';
+    baseUrl ??= 'http://192.168.168.87:4899/api/Auth';
   }
 
   final Dio _dio;
@@ -21,24 +21,22 @@ class _shoppingService implements shoppingService {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<List<cartDetailShoppingModel>>> GetAllShoppingcart(
-    int? userid,
-    int? PageNumber,
-  ) async {
+  Future<HttpResponse<dynamic>> Register(RegisterDTO? myregisterModel) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'PageNumber': PageNumber};
+    final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<HttpResponse<List<cartDetailShoppingModel>>>(Options(
-      method: 'GET',
+    final _data = <String, dynamic>{};
+    _data.addAll(myregisterModel?.toJson() ?? <String, dynamic>{});
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/GetAllShoppingcart/${userid}',
+              '/Register',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -47,10 +45,7 @@ class _shoppingService implements shoppingService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) =>
-            cartDetailShoppingModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = _result.data;
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

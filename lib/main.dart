@@ -1,3 +1,5 @@
+import 'package:digikalaapp/Feature/Login/Presentation/Page/Login.dart';
+import 'package:digikalaapp/Feature/Login/Presentation/Page/Register.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Widget/Category.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Widget/ProductView.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Widget/SinglepageProduct.dart';
@@ -22,7 +24,7 @@ class Myapp extends StatelessWidget
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/':(context)=>Home(),
+        '/':(context)=>register(),
         '/category':(context)=>category(),
         '/profile':(context)=>profile(),
         '/Product':(context)=>Productview(),

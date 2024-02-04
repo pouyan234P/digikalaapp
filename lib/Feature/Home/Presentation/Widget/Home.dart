@@ -61,7 +61,8 @@ class Homestate extends State<Home> {
         ),
       ),
       body: MyHome(),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar:
+      BottomNavigationBar(
         currentIndex: _index,
         items: const [
           BottomNavigationBarItem(

@@ -1,5 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:digikalaapp/Feature/Product/Domain/Entity/Userpoint/PointofviewEntity.dart';
+import 'package:digikalaapp/Feature/Product/Domain/Entity/ProductEntity.dart';
 import 'package:digikalaapp/Feature/Product/Domain/Entity/Userpoint/UserpointEntity.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/Userpoint/remote_userpoint_bloc.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/Userpoint/remote_userpoint_state.dart';
@@ -8,8 +8,7 @@ import 'package:digikalaapp/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../Domain/Entity/ProductEntity.dart';
+import 'package:get/get.dart';
 import '../../Domain/Usecase/get_CategorySearch.dart';
 import '../Bloc/Categorybloc/remote/Userpoint/remote_userpoint_event.dart';
 import '../Bloc/Categorybloc/remote/remote_category_bloc.dart';
@@ -17,11 +16,13 @@ import '../Bloc/Categorybloc/remote/remote_category_event.dart';
 
 int ? data;
 String ? average;
-double ? price;
+var price=0.0.obs;
 class singlePageproduct extends StatelessWidget {
    RemoteCategoryBloc yourBloc= RemoteCategoryBloc.y(s1<GetCategorySearchUseCase>());
+
   @override
   Widget build(BuildContext context) {
+
     data = ModalRoute.of(context)!.settings.arguments as int;
     // TODO: implement build
     return Scaffold(
@@ -77,7 +78,10 @@ class singlePageproduct extends StatelessWidget {
                               SizedBox(
                                 width: MediaQuery.of(context).size.width * .025,
                               ),
-                              Text(price.toString() ?? ""),
+                              Obx(() {
+
+                                return Text("$price");
+                              }),
                             ],
                           )),
                       const Positioned(
@@ -123,6 +127,12 @@ class mysinglepageproduct extends StatefulWidget {
 
 class mysinglepagestate extends State<mysinglepageproduct> {
   RemoteCategoryBloc yourBloc= RemoteCategoryBloc.y(s1<GetCategorySearchUseCase>());
+  void _updatepirce(double t)
+  {
+
+      price=RxDouble(t);
+
+  }
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -143,9 +153,13 @@ class mysinglepagestate extends State<mysinglepageproduct> {
                      }
                    if(state is RemoteProductDone)
                      {
-                       final newPrice = state.takproduct!.price!;
+                         var newPrice = state.takproduct!.price!;
+                     WidgetsBinding.instance!.addPostFrameCallback((_) {
+                       setState(() {
+                         _updatepirce(newPrice as double);
+                       });
 
-                         price = newPrice;
+                     });
                        return
                          Column(
                          crossAxisAlignment: CrossAxisAlignment.start,

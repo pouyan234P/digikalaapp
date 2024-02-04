@@ -13,7 +13,7 @@ class _UserpointService implements UserpointService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.1.102:4899/api/Userpoint';
+    baseUrl ??= 'http://192.168.168.87:4899/api/Userpoint';
   }
 
   final Dio _dio;
