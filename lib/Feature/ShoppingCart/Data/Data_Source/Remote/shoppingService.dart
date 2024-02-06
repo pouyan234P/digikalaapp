@@ -1,3 +1,4 @@
+import 'package:digikalaapp/Feature/ShoppingCart/Data/Model/CartDetailDTO.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Data/Model/cartDetailShoppingModel.dart';
 import 'package:dio/dio.dart';
 import 'package:digikalaapp/Core/Constants/Constants.dart';
@@ -12,4 +13,6 @@ abstract class shoppingService
 
   @GET('/GetAllShoppingcart/{userid}')
   Future<HttpResponse<List<cartDetailShoppingModel>>> GetAllShoppingcart(@Path('userid') int ? userid,@Query('PageNumber') int ? PageNumber);
+  @POST('/Addcart')
+  Future<HttpResponse> Addcart(@Body() CartDetailDTO  mycartDetailShoppingModel);
 }

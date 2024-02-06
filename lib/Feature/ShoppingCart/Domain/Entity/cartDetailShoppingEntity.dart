@@ -7,10 +7,10 @@ import 'package:equatable/equatable.dart';
 class cartDetailShoppingEntity extends Equatable
 {
   final int ? id ;
-final cartHeaderShoppingEntity ? Headerid;
-final productShoppingEntity ? productid;
-final int ? Count;
-const cartDetailShoppingEntity({
+  final cartHeaderShoppingEntity ? Headerid;
+  final productShoppingEntity ? productid;
+  final int ? Count;
+  const cartDetailShoppingEntity({
     this.id,
   this.productid,
   this.Headerid,

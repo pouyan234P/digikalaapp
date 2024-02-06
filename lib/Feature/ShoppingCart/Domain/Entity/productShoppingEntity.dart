@@ -12,13 +12,14 @@ final String ? Picture;
 final String ? Color;
 final String? hashColor ;
 const productShoppingEntity({
-    this.id,
+
   this.productid,
   this.Name,
   this.Color,
   this.Price,
   this.hashColor,
-  this.Picture
+  this.Picture,
+  this.id,
 });
   @override
   // TODO: implement props

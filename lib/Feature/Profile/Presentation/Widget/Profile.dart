@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Core/Constants/Constants.dart';
+
 class profile extends StatefulWidget
 {
   @override
@@ -38,52 +40,72 @@ class profilestate extends State<profile>
       ),),
       body: mainbody(),
       bottomNavigationBar:
-      BottomNavigationBar
-        (
+      BottomNavigationBar(
         currentIndex: _index,
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.supervisor_account_rounded),
               label: 'Profile',
               backgroundColor: Colors.white70),
-          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_cart),
               label: 'Shoppingcart',
               backgroundColor: Colors.white70),
-          BottomNavigationBarItem(icon: Icon(Icons.category),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.category),
               label: 'Category',
               backgroundColor: Colors.white70),
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
               backgroundColor: Colors.white70,
-              activeIcon: Icon(Icons.home,size: 55,)
-          ),
+              activeIcon: Icon(
+                Icons.home,
+                size: 55,
+              )),
         ],
-        onTap: (int index){
+        onTap: (int index) {
           setState(() {
             switch (index) {
               case 3:
                 {
                   //Home Page;
-                  Navigator.pushNamed(context,'/');
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/');
                   break;
                 }
               case 2:
                 {
                   //Account Page;
                   Navigator.pop(context);
-                  Navigator.pushNamed(context,'/category');
+                  Navigator.pushNamed(context, '/category');
                   break;
                 }
               case 1:
                 {
+                  if(token=="")
+                  {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login');
+                  }
+                  else {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/Shopping');
+                  }
                   //Shopping Basket Page;
                   break;
                 }
               case 0:
                 {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/profile');
+                  if(token=="")
+                  {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login');
+                  }
+                  else {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/profile');
+                  }
                 }
             }
           });

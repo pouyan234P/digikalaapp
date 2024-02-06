@@ -13,6 +13,10 @@ class RemoteShoppingBloc extends Bloc<RemoteShoppingEvent,RemoteShoppingState>
   {
     on<GetShoppingEvent>(onGetShoppingcart);
   }
+  RemoteShoppingBloc.Add(this._cartUseCase):super(RemoteAddShoppingLoading())
+  {
+    on<getAddShoppingEvent>(onGetAddShoppingcart);
+  }
   void onGetShoppingcart(GetShoppingEvent event,Emitter<RemoteShoppingState> emit) async
   {
     final dataState=await _cartUseCase.callShoppingcart(event.userid,event.PageNumber);
@@ -28,5 +32,21 @@ class RemoteShoppingBloc extends Bloc<RemoteShoppingEvent,RemoteShoppingState>
           RemoteShoppingError(dataState.error!)
       );
     }
+  }
+  void onGetAddShoppingcart(getAddShoppingEvent event,Emitter<RemoteShoppingState> emit) async
+  {
+    final datastate=await _cartUseCase.Addcart(event.cartdetail);
+    if(datastate is DataSuccess)
+      {
+        emit(
+          RemoteAddShoppingDone()
+        );
+      }
+    if(datastate is DataFailed)
+      {
+        emit(
+          RemoteAddShoppingError(datastate.error!)
+        );
+      }
   }
 }

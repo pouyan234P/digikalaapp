@@ -1,7 +1,12 @@
+import 'package:digikalaapp/Feature/Login/Data/Data_Source/Remote/Login/loginService.dart';
 import 'package:digikalaapp/Feature/Login/Data/Data_Source/Remote/registerService.dart';
+import 'package:digikalaapp/Feature/Login/Data/Repository/Login/loginRepositoryImpl.dart';
 import 'package:digikalaapp/Feature/Login/Data/Repository/registerRepositoryImpl.dart';
+import 'package:digikalaapp/Feature/Login/Domain/Repository/Login/loginRepository.dart';
 import 'package:digikalaapp/Feature/Login/Domain/Repository/registerRepository.dart';
+import 'package:digikalaapp/Feature/Login/Domain/Usecase/get_login_usecase.dart';
 import 'package:digikalaapp/Feature/Login/Domain/Usecase/get_register_usecase.dart';
+import 'package:digikalaapp/Feature/Login/Presentation/Bloc/Remote/Login/remote_login_Bloc.dart';
 import 'package:digikalaapp/Feature/Login/Presentation/Bloc/Remote/remote_register_Bloc.dart';
 import 'package:digikalaapp/Feature/Product/Data/Data_Source/Remote/ProductService.dart';
 import 'package:digikalaapp/Feature/Product/Data/Data_Source/Remote/Userpoint/UserpointService.dart';
@@ -52,4 +57,8 @@ Future<void> initialDependencies() async
   s1.registerSingleton<registerRepository>(registerRepositoryImpl(s1<registerService>()));
   s1.registerSingleton<getRegisterUsecase>(getRegisterUsecase(s1<registerRepository>()));
   s1.registerFactory<remoteRegisterBloc>(() => remoteRegisterBloc(s1<getRegisterUsecase>()));
+  s1.registerSingleton<loginService>(loginService(s1<Dio>()));
+  s1.registerSingleton<loginRepository>(loginRepositoryImpl(s1<loginService>()));
+  s1.registerSingleton<getLoginUsecase>(getLoginUsecase(s1<loginRepository>()));
+  s1.registerFactory<remoteLoginBloc>(() => remoteLoginBloc(s1<getLoginUsecase>()));
 }

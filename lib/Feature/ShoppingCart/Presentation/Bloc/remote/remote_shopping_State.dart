@@ -34,3 +34,26 @@ class RemoteShoppingError extends RemoteShoppingState
   @override
   List<Object> get props =>[error!];
 }
+class RemoteAddShoppingLoading extends RemoteShoppingState
+{
+  RemoteAddShoppingLoading();
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
+class RemoteAddShoppingDone extends RemoteShoppingState
+{
+  RemoteAddShoppingDone();
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+
+}
+class RemoteAddShoppingError extends RemoteShoppingState
+{
+  RemoteAddShoppingError(DioException error):super(error: error);
+  @override
+  // TODO: implement props
+  List<Object?> get props => [error!];
+
+}

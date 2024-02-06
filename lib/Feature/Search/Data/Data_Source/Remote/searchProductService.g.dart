@@ -13,7 +13,7 @@ class _searchProductService implements searchProductService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.168.87:4899/api/Product';
+    baseUrl ??= 'http://192.168.1.102:4899/api/Product';
   }
 
   final Dio _dio;
@@ -23,11 +23,11 @@ class _searchProductService implements searchProductService {
   @override
   Future<HttpResponse<List<searchProductModel>>> getProductbyCategory(
       String? name) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<searchProductModel>>>(Options(
       method: 'GET',

@@ -13,7 +13,7 @@ class _ProductService implements ProductService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.168.87:4899/api/Product';
+    baseUrl ??= 'http://192.168.1.102:4899/api/Product';
   }
 
   final Dio _dio;
@@ -25,11 +25,11 @@ class _ProductService implements ProductService {
     String? name,
     int PageNumber,
   ) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'PageNumber': PageNumber};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<HttpResponse<List<ProductModel>>>(Options(
       method: 'GET',
@@ -56,11 +56,11 @@ class _ProductService implements ProductService {
 
   @override
   Future<HttpResponse<ProductModel>> getProductbyId(int? id) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
+    const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<ProductModel>>(Options(
       method: 'GET',

@@ -13,7 +13,7 @@ class _registerService implements registerService {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'http://192.168.168.87:4899/api/Auth';
+    baseUrl ??= 'http://192.168.1.102:4899/api/Auth';
   }
 
   final Dio _dio;
@@ -22,7 +22,7 @@ class _registerService implements registerService {
 
   @override
   Future<HttpResponse<dynamic>> Register(RegisterDTO? myregisterModel) async {
-    const _extra = <String, dynamic>{};
+    final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

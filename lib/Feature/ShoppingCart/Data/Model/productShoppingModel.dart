@@ -5,14 +5,14 @@ import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/productShoppingEn
 class productShoppingModel extends productShoppingEntity
 {
   productShoppingModel({
-     int? id,
-     int? productid,
-     String ? Name ,
-     double ? Price,
-     String ? Picture,
-     String ? Color,
-     String? hashColor,
-}):super(id: id,Color: Color,Price: Price,Name: Name,hashColor: hashColor,Picture: Picture,productid: productid);
+    int? id,
+    int? productid,
+    String ? Name ,
+    double ? Price,
+    String ? Picture,
+    String ? Color,
+    String? hashColor,
+  }):super(id: id,Color: Color,Price: Price,Name: Name,hashColor: hashColor,Picture: Picture,productid: productid);
   factory productShoppingModel.fromJson(Map< String,dynamic > map)
   {
     return productShoppingModel(

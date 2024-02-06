@@ -24,13 +24,15 @@ class Myapp extends StatelessWidget
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/':(context)=>register(),
+        '/':(context)=>Home(),
         '/category':(context)=>category(),
         '/profile':(context)=>profile(),
         '/Product':(context)=>Productview(),
         '/singlePageproduct':(context)=>singlePageproduct(),
         '/Search':(context)=>SearchUi(),
         '/Shopping':(context)=>ShoppingUi(),
+        '/login':(context)=>login(),
+        '/register':(context)=>register()
       },
       debugShowCheckedModeBanner: false,
     );

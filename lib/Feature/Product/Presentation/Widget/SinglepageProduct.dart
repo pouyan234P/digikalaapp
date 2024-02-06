@@ -1,9 +1,19 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:digikalaapp/Core/Constants/Constants.dart';
 import 'package:digikalaapp/Feature/Product/Domain/Entity/ProductEntity.dart';
 import 'package:digikalaapp/Feature/Product/Domain/Entity/Userpoint/UserpointEntity.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/Userpoint/remote_userpoint_bloc.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/Userpoint/remote_userpoint_state.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/remote_category_state.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartAddDetailShoppingEntity.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartAddHeaderShoppingEntity.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartDetailShoppingEntity.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartHeaderShoppingEntity.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/productAddShoppingEntity.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/productShoppingEntity.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Usecase/get_shoppingCart.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Bloc/remote/remote_shopping_Bloc.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Bloc/remote/remote_shopping_Event.dart';
 import 'package:digikalaapp/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +26,8 @@ import '../Bloc/Categorybloc/remote/remote_category_event.dart';
 
 int ? data;
 String ? average;
-var price=0.0.obs;
+
 class singlePageproduct extends StatelessWidget {
-   RemoteCategoryBloc yourBloc= RemoteCategoryBloc.y(s1<GetCategorySearchUseCase>());
 
   @override
   Widget build(BuildContext context) {
@@ -66,52 +75,7 @@ class singlePageproduct extends StatelessWidget {
           ),
         ),
         body: mysinglepageproduct(),
-        bottomNavigationBar: BottomAppBar(
-          child:Stack(
-                    children: [
-                      Positioned(
-                          top: 20,
-                          left: 0,
-                          child: Row(
-                            children: [
-                              const Text('تومان'),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * .025,
-                              ),
-                              Obx(() {
 
-                                return Text("$price");
-                              }),
-                            ],
-                          )),
-                      const Positioned(
-                        top: -5,
-                        right: 0,
-                        child: Text("تنها 3 عدد در انبار باقی مانده"),
-                      ),
-                      Positioned(
-                        top: 20,
-                        right: 0,
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height * .037,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.red,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(5.0))),
-                            child: const Text(
-                              "افزودن به سبد کالا",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-
-
-            ),
    );
 
   }
@@ -127,10 +91,13 @@ class mysinglepageproduct extends StatefulWidget {
 
 class mysinglepagestate extends State<mysinglepageproduct> {
   RemoteCategoryBloc yourBloc= RemoteCategoryBloc.y(s1<GetCategorySearchUseCase>());
+  RemoteShoppingBloc shopBloc=RemoteShoppingBloc.Add(s1<GetShoppingCartUseCase>());
+  ProductEntity ? myproduct;
+  var price;
   void _updatepirce(double t)
   {
 
-      price=RxDouble(t);
+      price=t;
 
   }
   @override
@@ -138,9 +105,11 @@ class mysinglepagestate extends State<mysinglepageproduct> {
     Size size = MediaQuery.of(context).size;
     // TODO: implement build
     return MaterialApp(
-      home: BlocProvider(
-        create: (_)=>yourBloc,
-        child: SafeArea(
+      home: Stack(
+        children:
+            [
+        BlocProvider(
+          create: (_)=>yourBloc,
           child: SingleChildScrollView(
             child: Directionality(
               textDirection: TextDirection.rtl,
@@ -153,6 +122,7 @@ class mysinglepagestate extends State<mysinglepageproduct> {
                      }
                    if(state is RemoteProductDone)
                      {
+                       myproduct=state.takproduct!;
                          var newPrice = state.takproduct!.price!;
                      WidgetsBinding.instance!.addPostFrameCallback((_) {
                        setState(() {
@@ -350,15 +320,87 @@ class mysinglepagestate extends State<mysinglepageproduct> {
                              ),
                            ),
                            Useropinion(),
+                           SizedBox(
+                             height: size.height*.1,
+                           )
                          ],
-                       );
+                                                );
                      }
                    return Container();
                  }),
 
               ),
-            ),
           ),
+        ),
+              BlocProvider(
+                create: (_)=>shopBloc,
+                child: Positioned(
+                  bottom:0,
+                    child:
+                    Container(
+                      color: Colors.white,
+                      width: size.width * 1,
+                      height: size.height * 0.07,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Stack(
+                        children: [
+                          Positioned(
+                              top: 20,
+                              left: 0,
+                              child: Row(
+                                children: [
+                                  const Text('تومان',style:
+                                    TextStyle(fontSize: 12),),
+                                  SizedBox(
+                                    width: MediaQuery.of(context).size.width * .025,
+                                  ),
+                                  Text("$price",style:
+                                    TextStyle(
+                                      fontSize: 12
+                                    ),)
+                                ],
+                              )),
+                          const Positioned(
+                            top: -3,
+                            right: 0,
+                            child: Text("تنها 3 عدد در انبار باقی مانده",style:
+                              TextStyle(
+                                fontSize: 12
+                              ),),
+                          ),
+                          Positioned(
+                            top: 20,
+                            right: 0,
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height * .037,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    var mycartheader=cartAddHeaderShoppingEntity(Userid: Userid);
+                                    var mycartproduct=productAddShoppingEntity(productid: myproduct!.id!,Name: myproduct!.name!,Picture: myproduct!.mainpictureUrlID!,Color: myproduct!.color!,Price: myproduct!.price);
+                                    var mycartdetail=cartAddDetailShoppingEntity(productid: mycartproduct,Headerid: mycartheader,Count: 1);
+                                    shopBloc.add(getAddShoppingEvent(mycartdetail));
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.red,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(5.0))),
+                                child: const Text(
+                                  "افزودن به سبد کالا",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ),
+                ),
+              ),
+      ]
       ),
       debugShowCheckedModeBanner: false,
       );

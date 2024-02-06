@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:digikalaapp/Core/Constants/Constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -92,6 +93,7 @@ class Homestate extends State<Home> {
               case 3:
                 {
                   //Home Page;
+                  Navigator.pop(context);
                   Navigator.pushNamed(context, '/');
                   break;
                 }
@@ -104,15 +106,29 @@ class Homestate extends State<Home> {
                 }
               case 1:
                 {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/Shopping');
+                  if(token=="")
+                    {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/login');
+                    }
+                  else {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/Shopping');
+                  }
                   //Shopping Basket Page;
                   break;
                 }
               case 0:
                 {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/profile');
+                  if(token=="")
+                    {
+                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/login');
+                    }
+                  else {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/profile');
+                  }
                 }
             }
           });

@@ -21,7 +21,7 @@ class registerRepositoryImpl extends registerRepository
           final httpResponse=await _service.Register(mydate);
           if (httpResponse.response.statusCode == HttpStatus.ok) {
 
-            return DataSuccess(httpResponse.data);
+            return DataSuccess(httpResponse.data!);
           }
           else {
             return DataFailed(

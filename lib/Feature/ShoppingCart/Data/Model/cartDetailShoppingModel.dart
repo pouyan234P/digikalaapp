@@ -9,18 +9,18 @@ import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartDetailShoppin
 class cartDetailShoppingModel extends cartDetailShoppingEntity
 {
   cartDetailShoppingModel({
-     int ? id ,
-     cartHeaderShoppingModel ? Headerid,
-     productShoppingModel ? productid,
-     int ? Count,
-}):super(id: id,productid: productid,Headerid: Headerid,Count: Count);
+    int ? id ,
+    cartHeaderShoppingModel ? Headerid,
+    productShoppingModel ? productid,
+    int ? Count,
+  }):super(id: id,productid: productid,Headerid: Headerid,Count: Count);
   factory cartDetailShoppingModel.fromJson(Map< String,dynamic > map)
   {
     return cartDetailShoppingModel(
-      Count: map["count"] ?? "",
-      Headerid:cartHeaderShoppingModel.fromJson(map["headerid"]),
-      productid:productShoppingModel.fromJson(map["productid"]),
-      id: map["id"] ?? ""
+        Count: map["count"] ?? "",
+        Headerid:cartHeaderShoppingModel.fromJson(map["headerid"]),
+        productid:productShoppingModel.fromJson(map["productid"]),
+        id: map["id"] ?? ""
     );
   }
 }

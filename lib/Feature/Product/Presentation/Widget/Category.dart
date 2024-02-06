@@ -6,6 +6,7 @@ import 'package:digikalaapp/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../Core/Constants/Constants.dart';
 import '../Bloc/Categorybloc/remote/remote_category_event.dart';
 
 class category extends StatefulWidget {
@@ -62,7 +63,8 @@ class categorystate extends State<category> {
         ),
       ),
       body: mycategory(),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar:
+      BottomNavigationBar(
         currentIndex: _index,
         items: const [
           BottomNavigationBarItem(
@@ -80,7 +82,11 @@ class categorystate extends State<category> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Home',
-              backgroundColor: Colors.white70),
+              backgroundColor: Colors.white70,
+              activeIcon: Icon(
+                Icons.home,
+                size: 55,
+              )),
         ],
         onTap: (int index) {
           setState(() {
@@ -99,10 +105,31 @@ class categorystate extends State<category> {
                   Navigator.pushNamed(context, '/category');
                   break;
                 }
-              case 2:
+              case 1:
                 {
+                  if(token=="")
+                  {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login');
+                  }
+                  else {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/Shopping');
+                  }
                   //Shopping Basket Page;
                   break;
+                }
+              case 0:
+                {
+                  if(token=="")
+                  {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login');
+                  }
+                  else {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/profile');
+                  }
                 }
             }
           });
