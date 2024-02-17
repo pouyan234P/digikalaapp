@@ -15,6 +15,8 @@ import 'package:digikalaapp/Feature/ShoppingCart/Data/Data_Source/Remote/shoppin
 import 'package:digikalaapp/Feature/ShoppingCart/Data/Model/cartDetailShoppingModel.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Domain/Repository/shoppingRepository.dart';
 
+import '../../../../Core/Constants/Constants.dart';
+
 class shoppingRepositoryImpl extends shoppingRepository
 {
   final shoppingService _service;
@@ -23,7 +25,8 @@ class shoppingRepositoryImpl extends shoppingRepository
   Future<DataState<List<cartDetailShoppingModel>>> GetAllShoppingcart(int ? userid,int ? PageNumber) async {
     try
         {
-          final httpResponse=await _service.GetAllShoppingcart(userid,PageNumber);
+          String mytoken='Bearer '+token;
+          final httpResponse=await _service.GetAllShoppingcart(userid,PageNumber,mytoken);
           if(httpResponse.response.statusCode==HttpStatus.ok)
             {
               return DataSuccess(httpResponse.data);
@@ -51,11 +54,12 @@ class shoppingRepositoryImpl extends shoppingRepository
     // TODO: implement Addcart
    try
        {
+         String mytoken='Bearer '+token;
 
          final httpResponse=await _service.Addcart(CartDetailDTO(productid:
          ProductDTO(productid: mycartDetailShoppingEntity!.productid!.productid!,Price: mycartDetailShoppingEntity!.productid!.Price!,Color: mycartDetailShoppingEntity!.productid!.Color!,Picture: mycartDetailShoppingEntity!.productid!.Picture!,Name: mycartDetailShoppingEntity!.productid!.Name!),
              headerid: CartHeaderDTO(userid: mycartDetailShoppingEntity!.Headerid!.Userid!),
-             Count: mycartDetailShoppingEntity!.Count!));
+             Count: mycartDetailShoppingEntity!.Count!),mytoken);
          if(httpResponse.response.statusCode==HttpStatus.ok)
            {
              return DataSuccess(httpResponse.data!);
@@ -77,6 +81,34 @@ class shoppingRepositoryImpl extends shoppingRepository
 
      return DataFailed(e);
    }
+  }
+
+  @override
+  Future<DataState> deleteCart(int detailid) async{
+    // TODO: implement deleteCart
+    try
+        {
+          String mytoken='Bearer '+token;
+          final httpResponse=await _service.deleteShoppingcart(detailid,mytoken);
+          if(httpResponse.response.statusCode==HttpStatus.ok)
+            {
+              return DataSuccess(httpResponse.data!);
+            }
+          else
+            {
+              return DataFailed(
+                  DioException(
+                      error: httpResponse.response.statusMessage,
+                      response: httpResponse.response,
+                      type: DioExceptionType.badResponse,
+                      requestOptions: httpResponse.response.requestOptions
+                  )
+              );
+            }
+        }on DioException catch(e)
+    {
+      return DataFailed(e);
+    }
   }
 
 }

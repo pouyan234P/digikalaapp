@@ -10,4 +10,5 @@ abstract class shoppingRepository
 {
   Future<DataState<List<cartDetailShoppingEntity>>> GetAllShoppingcart(int ? userid,int ?PageNumber);
   Future<DataState> Addcart(cartAddDetailShoppingEntity ? mycartDetailShoppingEntity);
+  Future<DataState> deleteCart(int detailid);
 }

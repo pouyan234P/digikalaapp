@@ -79,7 +79,9 @@ class MyHeader extends StatelessWidget
           ),
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, '/Search');
+      },
       child: const Row(
         children: [
           Icon(Icons.search,color: Colors.grey,),

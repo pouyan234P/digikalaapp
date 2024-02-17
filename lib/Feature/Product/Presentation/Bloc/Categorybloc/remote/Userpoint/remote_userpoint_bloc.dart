@@ -13,6 +13,10 @@ class RemoteUserpointBloc extends Bloc<RemoteuserpointEvent,RemoteUserpointState
   RemoteUserpointBloc(this._getUserpointUsecase):super( RemoteUserpointloading()){
     on <GetRemoteuserpointEvent>(onGetUserpoint);
   }
+  RemoteUserpointBloc.Add(this._getUserpointUsecase):super(RemoteUserpointAddLoading())
+  {
+    on<GetRemoteuserpointAddEvent>(onGetAddUserpoint);
+  }
 
   void onGetUserpoint(GetRemoteuserpointEvent event,Emitter<RemoteUserpointState> emit) async
   {
@@ -28,6 +32,22 @@ class RemoteUserpointBloc extends Bloc<RemoteuserpointEvent,RemoteUserpointState
       {
         emit(
           RemoteUserpointError(datastate.error!)
+        );
+      }
+  }
+  void onGetAddUserpoint(GetRemoteuserpointAddEvent event,Emitter<RemoteUserpointState> emit) async
+  {
+    final datastate=await _getUserpointUsecase.adduserpoint(event.userpointEntity);
+    if(datastate is DataSuccess)
+      {
+        emit(
+          RemoteUserpointAddDone()
+        );
+      }
+    if(datastate is DataFailed)
+      {
+        emit(
+          RemoteUserpointAddError(datastate.error!)
         );
       }
   }

@@ -35,8 +35,11 @@ class categorystate extends State<category> {
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
+
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/Search');
+            },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [

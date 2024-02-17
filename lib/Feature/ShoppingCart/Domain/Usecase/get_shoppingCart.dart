@@ -20,4 +20,8 @@ class GetShoppingCartUseCase
   {
     return await _repository.Addcart(mycartDetailShoppingEntity );
   }
+  Future<DataState> deleteShoppingcart(int ? detailid) async
+  {
+    return await _repository.deleteCart(detailid!);
+  }
 }

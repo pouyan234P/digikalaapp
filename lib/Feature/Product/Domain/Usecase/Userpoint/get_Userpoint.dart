@@ -14,4 +14,8 @@ class GetUserpointUsecase
   {
     return await _repository.GetUserpoints(productid);
   }
+  Future<DataState> adduserpoint(UserpointEntity ? userpointEntity) async
+  {
+    return await _repository.addUserpoint(userpointEntity);
+  }
 }

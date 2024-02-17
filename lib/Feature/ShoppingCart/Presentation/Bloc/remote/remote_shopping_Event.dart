@@ -18,3 +18,8 @@ class getAddShoppingEvent extends RemoteShoppingEvent
   final cartAddDetailShoppingEntity cartdetail;
   getAddShoppingEvent(this.cartdetail);
 }
+class getDeleteShoppingEvent extends RemoteShoppingEvent
+{
+  final int detailid;
+  getDeleteShoppingEvent(this.detailid);
+}

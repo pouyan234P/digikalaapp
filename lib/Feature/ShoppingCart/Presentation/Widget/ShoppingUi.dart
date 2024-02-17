@@ -1,5 +1,6 @@
 import 'package:digikalaapp/Core/Constants/Constants.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartDetailShoppingEntity.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Domain/Usecase/get_shoppingCart.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Bloc/remote/remote_shopping_Bloc.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Bloc/remote/remote_shopping_Event.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Bloc/remote/remote_shopping_State.dart';
@@ -7,6 +8,7 @@ import 'package:digikalaapp/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
  double ?  average;
+ var contextscafold;
 class ShoppingUi extends StatefulWidget {
 
   @override
@@ -19,57 +21,76 @@ class ShoppingUiState extends State<ShoppingUi> {
   @override
   Widget build(BuildContext context) {
     int _index = 0;
-
+    contextscafold=context;
     return Scaffold(
       body: BodyShoppingUi(),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar:
+      BottomNavigationBar(
         currentIndex: _index,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.supervisor_account_rounded),
-            label: 'Profile',
-            backgroundColor: Colors.white70,
-          ),
+              icon: Icon(Icons.supervisor_account_rounded),
+              label: 'Profile',
+              backgroundColor: Colors.white70),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_cart),
-            label: 'Shoppingcart',
-            backgroundColor: Colors.white70,
-          ),
+              icon: Icon(Icons.shopping_cart),
+              label: 'Shoppingcart',
+              backgroundColor: Colors.white70),
           BottomNavigationBarItem(
-            icon: Icon(Icons.category),
-            label: 'Category',
-            backgroundColor: Colors.white70,
-          ),
+              icon: Icon(Icons.category),
+              label: 'Category',
+              backgroundColor: Colors.white70),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-            backgroundColor: Colors.white70,
-            activeIcon: Icon(Icons.home, size: 55),
-          ),
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Colors.white70,
+              activeIcon: Icon(
+                Icons.home,
+                size: 55,
+              )),
         ],
         onTap: (int index) {
           setState(() {
             switch (index) {
               case 3:
                 {
+                  //Home Page;
+                  Navigator.pop(context);
                   Navigator.pushNamed(context, '/');
                   break;
                 }
               case 2:
                 {
+                  //Account Page;
                   Navigator.pop(context);
                   Navigator.pushNamed(context, '/category');
                   break;
                 }
               case 1:
                 {
-                  // Shopping Basket Page;
+                  if(token=="")
+                  {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login');
+                  }
+                  else {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/Shopping');
+                  }
+                  //Shopping Basket Page;
                   break;
                 }
               case 0:
                 {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/profile');
+                  if(token=="")
+                  {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/login');
+                  }
+                  else {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/profile');
+                  }
                 }
             }
           });
@@ -91,7 +112,7 @@ class BodyShoppingUi extends StatefulWidget {
 class BodyShoppingUiState extends State<BodyShoppingUi>
 {
   final RemoteShoppingBloc yourbloc = s1<RemoteShoppingBloc>();
-
+  RemoteShoppingBloc DeleteBloc= RemoteShoppingBloc.Delete(s1<GetShoppingCartUseCase>());
   void _updateAverage(List<cartDetailShoppingEntity>? list) {
     double sum = 0;
     for (var item in list!) {
@@ -218,7 +239,16 @@ class BodyShoppingUiState extends State<BodyShoppingUi>
                                                               )
                                                             ],
                                                           ),
-                                                          const Icon(Icons.delete)
+                                                          ElevatedButton(onPressed: (){
+                                                           DeleteBloc.add(getDeleteShoppingEvent(state.listshoppingcart![index].id!));
+                                                           state.listshoppingcart!.removeAt(index);
+                                                           const snackBar = SnackBar(
+                                                             content: Text('Success!'),
+                                                           );
+                                                           ScaffoldMessenger.of(contextscafold).showSnackBar(snackBar);
+                                                          },
+                                                              child: const Icon(Icons.delete))
+
                                                         ],
                                                       ),
                                                     ),

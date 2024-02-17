@@ -32,4 +32,7 @@ class ProductModel extends ProductEntity
       nameforushghah: map['nameforushghah']
     );
   }
+  Map<String,dynamic> toJson()=>{
+    'id': id ?? 0,
+  };
 }

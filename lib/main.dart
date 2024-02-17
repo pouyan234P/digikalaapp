@@ -3,6 +3,7 @@ import 'package:digikalaapp/Feature/Login/Presentation/Page/Register.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Widget/Category.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Widget/ProductView.dart';
 import 'package:digikalaapp/Feature/Product/Presentation/Widget/SinglepageProduct.dart';
+import 'package:digikalaapp/Feature/Product/Presentation/Widget/Userpoint/userPointView.dart';
 import 'package:digikalaapp/Feature/Profile/Presentation/Widget/Profile.dart';
 import 'package:digikalaapp/Feature/Search/Presentation/Widget/SearchUi.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Widget/ShoppingUi.dart';
@@ -32,7 +33,8 @@ class Myapp extends StatelessWidget
         '/Search':(context)=>SearchUi(),
         '/Shopping':(context)=>ShoppingUi(),
         '/login':(context)=>login(),
-        '/register':(context)=>register()
+        '/register':(context)=>register(),
+        '/userPoint':(context)=>userpointView()
       },
       debugShowCheckedModeBanner: false,
     );

@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-
+var contextscafold;
 class login extends StatefulWidget
 {
   @override
@@ -26,6 +26,7 @@ class loginState extends State<login>
   @override
   Widget build(BuildContext context) {
     int _index = 0;
+    contextscafold=context;
     // TODO: implement build
    return Scaffold(
       body:loginBody(),
@@ -142,8 +143,19 @@ class loginBodyState extends State<loginBody>
                       Map<String, dynamic> decodedToken = JwtDecoder.decode(token);
                       Userid=int.parse(decodedToken['nameid']);
                       log(Userid);
+                      final snackBar = SnackBar(
+                        content: Text('Success'),
+                      );
+                      ScaffoldMessenger.of(contextscafold).showSnackBar(snackBar);
                       Navigator.pop(context);
                       Navigator.pushNamed(t, '/profile');
+                    }
+                  if(state is remoteLoginError)
+                    {
+                      final snackBar = SnackBar(
+                        content: Text(state.error.toString()),
+                      );
+                      ScaffoldMessenger.of(contextscafold).showSnackBar(snackBar);
                     }
                 },
                 child: Column(

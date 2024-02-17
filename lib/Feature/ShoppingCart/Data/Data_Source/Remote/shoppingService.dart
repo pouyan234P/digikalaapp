@@ -12,7 +12,9 @@ abstract class shoppingService
   factory shoppingService(Dio dio)=_shoppingService;
 
   @GET('/GetAllShoppingcart/{userid}')
-  Future<HttpResponse<List<cartDetailShoppingModel>>> GetAllShoppingcart(@Path('userid') int ? userid,@Query('PageNumber') int ? PageNumber);
+  Future<HttpResponse<List<cartDetailShoppingModel>>> GetAllShoppingcart(@Path('userid') int ? userid,@Query('PageNumber') int ? PageNumber,@Header('Authorization')String token);
   @POST('/Addcart')
-  Future<HttpResponse> Addcart(@Body() CartDetailDTO  mycartDetailShoppingModel);
+  Future<HttpResponse> Addcart(@Body() CartDetailDTO  mycartDetailShoppingModel,@Header('Authorization')String token);
+  @POST('/DeleteShoppingcart/{detailid}')
+  Future<HttpResponse> deleteShoppingcart(@Path('detailid') int ? detailid,@Header('Authorization')String token);
 }

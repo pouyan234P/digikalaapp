@@ -23,4 +23,11 @@ class PointofviewModel extends PointofviewEntity
       Commenttext: map["commenttext"] ?? ""
     );
   }
+  Map<String,dynamic> toJson()=>{
+    'Commenttext':Commenttext,
+    'Commenttitle':Commenttitle,
+     'Negativepoints':Negativepoints,
+    'Positivepoints':Positivepoints,
+    'Score':Score
+  };
 }

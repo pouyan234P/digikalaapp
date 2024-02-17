@@ -35,3 +35,25 @@ class RemoteUserpointError extends RemoteUserpointState
   List<Object?> get props => [error!];
 
 }
+class RemoteUserpointAddLoading extends RemoteUserpointState
+{
+  RemoteUserpointAddLoading();
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
+class RemoteUserpointAddDone extends RemoteUserpointState
+{
+  RemoteUserpointAddDone();
+  @override
+  // TODO: implement props
+  List<Object?> get props => [];
+}
+class RemoteUserpointAddError extends RemoteUserpointState
+{
+  RemoteUserpointAddError(DioException error):super(error: error);
+  @override
+  // TODO: implement props
+  List<Object?> get props => [error!];
+
+}

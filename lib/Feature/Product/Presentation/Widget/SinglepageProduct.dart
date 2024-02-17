@@ -7,13 +7,12 @@ import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remot
 import 'package:digikalaapp/Feature/Product/Presentation/Bloc/Categorybloc/remote/remote_category_state.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartAddDetailShoppingEntity.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartAddHeaderShoppingEntity.dart';
-import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartDetailShoppingEntity.dart';
-import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/cartHeaderShoppingEntity.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/productAddShoppingEntity.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Domain/Entity/productShoppingEntity.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Domain/Usecase/get_shoppingCart.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Bloc/remote/remote_shopping_Bloc.dart';
 import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Bloc/remote/remote_shopping_Event.dart';
+import 'package:digikalaapp/Feature/ShoppingCart/Presentation/Bloc/remote/remote_shopping_State.dart';
 import 'package:digikalaapp/injection_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +25,12 @@ import '../Bloc/Categorybloc/remote/remote_category_event.dart';
 
 int ? data;
 String ? average;
-
+var contextscafold;
 class singlePageproduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    contextscafold=context;
     data = ModalRoute.of(context)!.settings.arguments as int;
     // TODO: implement build
     return Scaffold(
@@ -113,221 +112,255 @@ class mysinglepagestate extends State<mysinglepageproduct> {
           child: SingleChildScrollView(
             child: Directionality(
               textDirection: TextDirection.rtl,
-              child: BlocBuilder<RemoteCategoryBloc,RemoteCategoryState>(
-                 builder: (context,state){
-                   if(state is RemoteProductLoading)
-                     {
-                       yourBloc.add(GetSingleProductEvent(data!));
-                       return CircularProgressIndicator();
-                     }
-                   if(state is RemoteProductDone)
-                     {
-                       myproduct=state.takproduct!;
-                         var newPrice = state.takproduct!.price!;
-                     WidgetsBinding.instance!.addPostFrameCallback((_) {
-                       setState(() {
-                         _updatepirce(newPrice as double);
-                       });
+              child: Column(
+                children: [
+                  BlocBuilder<RemoteCategoryBloc,RemoteCategoryState>(
+                      builder: (context,state){
+                        if(state is RemoteProductLoading)
+                        {
+                          yourBloc.add(GetSingleProductEvent(data!));
+                          return CircularProgressIndicator();
+                        }
+                        if(state is RemoteProductDone)
+                        {
+                          myproduct=state.takproduct!;
+                          var newPrice = state.takproduct!.price!;
+                          WidgetsBinding.instance!.addPostFrameCallback((_) {
+                            setState(() {
+                              _updatepirce(newPrice as double);
+                            });
 
-                     });
-                       return
-                         Column(
-                         crossAxisAlignment: CrossAxisAlignment.start,
-                         children: [
-                           Padding(
-                             padding: const EdgeInsets.only(right: 30),
-                             child: Column(
-                               crossAxisAlignment: CrossAxisAlignment.start,
-                               children: [
-                                 slider(),
-                                 const Text(
-                                   'شیاومی/گوسی موبایل شیاِِومی',
-                                   style: TextStyle(fontSize: 12, color: Colors.lightBlue),
-                                 ),
-                                 SizedBox(
-                                   width: size.width * .7,
-                                   child: Text(
-                                     state.takproduct!.name!,
-                                     style: const TextStyle(
-                                         fontSize: 13,
-                                         fontWeight: FontWeight.bold,
-                                         color: Colors.black),
-                                     softWrap: true,
-                                     maxLines: 2,
-                                   ),
-                                 ),
-                                 SizedBox(
-                                   height: size.height * .025,
-                                 ),
-                                 Row(
-                                   children: [
-                                     const Icon(
-                                       Icons.star,
-                                       color: Colors.yellow,
-                                     ),
-                                     Text(
-                                       average ?? "N/A",
-                                       style: const TextStyle(fontSize: 12),
-                                     ),
-                                     SizedBox(
-                                       width: size.width * .04,
-                                     ),
-                                     const Text(
-                                       '2751 دیدگاه کاربران',
-                                       style: TextStyle(
-                                           fontSize: 12, color: Colors.lightBlue),
-                                     ),
-                                     SizedBox(
-                                       width: size.width * .04,
-                                     ),
-                                     const Text(
-                                       '491 پرسش و پاسخ',
-                                       style: TextStyle(
-                                           fontSize: 12, color: Colors.lightBlue),
-                                     ),
-                                   ],
-                                 ),
-                                 SizedBox(
-                                   height: size.width * .025,
-                                 ),
-                                 const Padding(
-                                   padding: EdgeInsets.only(left: 70),
-                                   child: Divider(
-                                     height: 5,
-                                     color: Colors.grey,
-                                   ),
-                                 ),
-                                 SizedBox(
-                                   height: size.height * .025,
-                                 ),
-                                 Row(
-                                   children: [
-                                     const Text(
-                                       'رنگ:',
-                                       style: TextStyle(fontSize: 12, color: Colors.black),
-                                     ),
-                                     Text(
-                                       state.takproduct!.color!,
-                                       style: const TextStyle(
-                                           fontSize: 12, color: Colors.black),
-                                     )
-                                   ],
-                                 ),
-                               ],
-                             ),
-                           ),
-                           Container(
-                             height: size.height * .01,
-                             color: Colors.grey,
-                           ),
-                           TextButton(
-                               onPressed: () {},
-                               child: SizedBox(
-                                 height: size.height * .03,
-                                 child: const Stack(
-                                   children: [
-                                     Positioned(
-                                       right: 0,
-                                       child: Text(
-                                         'مشخسات فنی',
-                                         style: TextStyle(fontSize: 12),
-                                       ),
-                                     ),
-                                     Positioned(
-                                       left: 0,
-                                       child: Icon(Icons.keyboard_arrow_left),
-                                     )
-                                   ],
-                                 ),
-                               )),
-                           const Padding(
-                             padding: EdgeInsets.only(left: 25, right: 10),
-                             child: Divider(
-                               height: 5,
-                               color: Colors.grey,
-                             ),
-                           ),
-                           TextButton(
-                               onPressed: () {},
-                               child: SizedBox(
-                                 height: size.height * .03,
-                                 child: const Stack(
-                                   children: [
-                                     Positioned(
-                                       right: 0,
-                                       child: Text(
-                                         'معرفی اجمالی',
-                                         style: TextStyle(fontSize: 12),
-                                       ),
-                                     ),
-                                     Positioned(
-                                       left: 0,
-                                       child: Icon(Icons.keyboard_arrow_left),
-                                     )
-                                   ],
-                                 ),
-                               )),
-                           Container(
-                             height: size.height * .07,
-                             color: Colors.grey,
-                             child: Row(
-                               children: [
-                                 SizedBox(
-                                   height: size.height * .05,
-                                   child: ElevatedButton(
-                                       onPressed: () {},
-                                       style: ElevatedButton.styleFrom(
-                                           backgroundColor: Colors.white,
-                                           shape: RoundedRectangleBorder(
-                                               borderRadius: BorderRadius.circular(25.0))),
-                                       child: Row(
-                                         children: [
-                                           Image.asset(
-                                             'assets/images/iphone13.png',
-                                             width: size.width * .1,
-                                             height: size.height * .09,
-                                           ),
-                                           SizedBox(
-                                             width: size.width * .025,
-                                           ),
-                                           const Text(
-                                             'گوشی موبایل',
-                                             style: TextStyle(fontSize: 12),
-                                           ),
-                                           const Icon(Icons.keyboard_arrow_left)
-                                         ],
-                                       )),
-                                 ),
-                                 SizedBox(
-                                   width: size.width * .025,
-                                 ),
-                                 ElevatedButton(
-                                     onPressed: () {},
-                                     style: ElevatedButton.styleFrom(
-                                         backgroundColor: Colors.white,
-                                         shape: RoundedRectangleBorder(
-                                             borderRadius: BorderRadius.circular(25.0))),
-                                     child: const Row(
-                                       children: [
-                                         Text(
-                                           'موبایل',
-                                           style: TextStyle(fontSize: 12),
-                                         ),
-                                         Icon(Icons.keyboard_arrow_left)
-                                       ],
-                                     )),
-                               ],
-                             ),
-                           ),
-                           Useropinion(),
-                           SizedBox(
-                             height: size.height*.1,
-                           )
-                         ],
-                                                );
-                     }
-                   return Container();
-                 }),
+                          });
+                          return
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 30),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      slider(),
+                                      const Text(
+                                        'شیاومی/گوسی موبایل شیاِِومی',
+                                        style: TextStyle(fontSize: 12, color: Colors.lightBlue),
+                                      ),
+                                      SizedBox(
+                                        width: size.width * .7,
+                                        child: Text(
+                                          state.takproduct!.name!,
+                                          style: const TextStyle(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: size.height * .025,
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Icon(
+                                            Icons.star,
+                                            color: Colors.yellow,
+                                          ),
+                                          Text(
+                                            average ?? "N/A",
+                                            style: const TextStyle(fontSize: 12),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * .04,
+                                          ),
+                                          const Text(
+                                            '2751 دیدگاه کاربران',
+                                            style: TextStyle(
+                                                fontSize: 12, color: Colors.lightBlue),
+                                          ),
+                                          SizedBox(
+                                            width: size.width * .04,
+                                          ),
+                                          const Text(
+                                            '491 پرسش و پاسخ',
+                                            style: TextStyle(
+                                                fontSize: 12, color: Colors.lightBlue),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: size.width * .025,
+                                      ),
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 70),
+                                        child: Divider(
+                                          height: 5,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: size.height * .025,
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'رنگ:',
+                                            style: TextStyle(fontSize: 12, color: Colors.black),
+                                          ),
+                                          Text(
+                                            state.takproduct!.color!,
+                                            style: const TextStyle(
+                                                fontSize: 12, color: Colors.black),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  height: size.height * .01,
+                                  color: Colors.grey,
+                                ),
+                                TextButton(
+                                    onPressed: () {},
+                                    child: SizedBox(
+                                      height: size.height * .03,
+                                      child: const Stack(
+                                        children: [
+                                          Positioned(
+                                            right: 0,
+                                            child: Text(
+                                              'مشخسات فنی',
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 0,
+                                            child: Icon(Icons.keyboard_arrow_left),
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                                const Padding(
+                                  padding: EdgeInsets.only(left: 25, right: 10),
+                                  child: Divider(
+                                    height: 5,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                                TextButton(
+                                    onPressed: () {},
+                                    child: SizedBox(
+                                      height: size.height * .03,
+                                      child: const Stack(
+                                        children: [
+                                          Positioned(
+                                            right: 0,
+                                            child: Text(
+                                              'معرفی اجمالی',
+                                              style: TextStyle(fontSize: 12),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 0,
+                                            child: Icon(Icons.keyboard_arrow_left),
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                                Container(
+                                  height: size.height * .07,
+                                  color: Colors.grey,
+                                  child: Row(
+                                    children: [
+                                      SizedBox(
+                                        height: size.height * .05,
+                                        child: ElevatedButton(
+                                            onPressed: () {},
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.white,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(25.0))),
+                                            child: Row(
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/iphone13.png',
+                                                  width: size.width * .1,
+                                                  height: size.height * .09,
+                                                ),
+                                                SizedBox(
+                                                  width: size.width * .025,
+                                                ),
+                                                const Text(
+                                                  'گوشی موبایل',
+                                                  style: TextStyle(fontSize: 12),
+                                                ),
+                                                const Icon(Icons.keyboard_arrow_left)
+                                              ],
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        width: size.width * .025,
+                                      ),
+                                      ElevatedButton(
+                                          onPressed: () {},
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: Colors.white,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius: BorderRadius.circular(25.0))),
+                                          child: const Row(
+                                            children: [
+                                              Text(
+                                                'موبایل',
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                              Icon(Icons.keyboard_arrow_left)
+                                            ],
+                                          )),
+                                    ],
+                                  ),
+                                ),
+
+                              ],
+                            );
+                        }
+                        return Container();
+                      }),
+                  Useropinion(),
+                  SizedBox(
+                    height: size.height*.05,
+                  ),
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.mode_comment_outlined),
+                        Text('دیدگاه را درباره این کالا بنویسید',style:
+                          TextStyle(
+                            fontSize: 12,
+                            color: Colors.black
+                          ),),
+                        TextButton(onPressed: (){
+                          if(token!='')
+                            {
+                              Navigator.pushNamed(contextscafold, '/userPoint',arguments:myproduct );
+                            }
+                          else
+                            {
+                              Navigator.pushNamed(contextscafold, '/login');
+                            }
+                        }, child:
+                        Icon(Icons.navigate_next))
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height*.1,
+                  ),
+                ],
+
+              ),
 
               ),
           ),
@@ -374,22 +407,44 @@ class mysinglepagestate extends State<mysinglepageproduct> {
                             right: 0,
                             child: SizedBox(
                               height: MediaQuery.of(context).size.height * .037,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  setState(() {
-                                    var mycartheader=cartAddHeaderShoppingEntity(Userid: Userid);
-                                    var mycartproduct=productAddShoppingEntity(productid: myproduct!.id!,Name: myproduct!.name!,Picture: myproduct!.mainpictureUrlID!,Color: myproduct!.color!,Price: myproduct!.price);
-                                    var mycartdetail=cartAddDetailShoppingEntity(productid: mycartproduct,Headerid: mycartheader,Count: 1);
-                                    shopBloc.add(getAddShoppingEvent(mycartdetail));
-                                  });
+                              child: BlocListener<RemoteShoppingBloc,RemoteShoppingState>(
+                                listener: (context,state){
+                                  if(state is RemoteAddShoppingDone)
+                                    {
+                                      final snackBar = SnackBar(
+                                        content: Text('Success!'),
+                                      );
+                                      ScaffoldMessenger.of(contextscafold).showSnackBar(snackBar);
+
+                                    }
+                                  if(state is RemoteAddShoppingError)
+                                    {
+                                      final snackBar = SnackBar(
+                                        content: Text(state.error.toString()),
+                                      );
+                                      ScaffoldMessenger.of(contextscafold).showSnackBar(snackBar);
+                                    }
                                 },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.red,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5.0))),
-                                child: const Text(
-                                  "افزودن به سبد کالا",
-                                  style: TextStyle(color: Colors.white),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      var mycartheader=cartAddHeaderShoppingEntity(Userid: Userid);
+                                      var mycartproduct=productAddShoppingEntity(productid: myproduct!.id!,Name: myproduct!.name!,Picture: myproduct!.mainpictureUrlID!,Color: myproduct!.color!,Price: myproduct!.price);
+                                      var mycartdetail=cartAddDetailShoppingEntity(productid: mycartproduct,Headerid: mycartheader,Count: 1);
+                                      shopBloc.add(getAddShoppingEvent(mycartdetail));
+                                    });
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(5.0),
+                                      ),
+
+                                  ),
+                                  child: const Text(
+                                    "افزودن به سبد کالا",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ),
                               ),
                             ),

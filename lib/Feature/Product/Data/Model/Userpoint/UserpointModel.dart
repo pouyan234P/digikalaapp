@@ -5,11 +5,14 @@ import 'package:digikalaapp/Feature/Product/Domain/Entity/Userpoint/UserpointEnt
 
 class UserpointModel extends UserpointEntity
 {
+  PointofviewModel ? Pointofviewid;
+  ProductModel ? Productid;
+  int ? Userid;
   UserpointModel({
    int ? id,
-    PointofviewModel ? Pointofviewid,
-   int ? Userid,
-   ProductModel ? Productid,
+    this.Pointofviewid,
+   this.Userid,
+   this.Productid
 }):super(id: id,Pointofviewid: Pointofviewid,Userid: Userid,Productid: Productid);
   factory UserpointModel.fromJson(Map< String,dynamic > map)
   {
@@ -20,4 +23,9 @@ class UserpointModel extends UserpointEntity
       Productid:ProductModel.fromJson(map['productid']),
     );
   }
+  Map<String, dynamic> toJson() => {
+    'Pointofviewid': Pointofviewid?.toJson(),
+    'Productid': Productid?.toJson(),
+    'Userid': Userid ?? 0
+  };
 }

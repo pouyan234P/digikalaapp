@@ -13,4 +13,6 @@ abstract class UserpointService
 
   @GET('/GetUserpoints/{productid}')
   Future<HttpResponse<List<UserpointModel>>> GetUserpoints(@Path('productid') int ? productid);
+  @POST('/addUserpoint')
+  Future<HttpResponse> addUserpoint(@Body() UserpointModel ? userPointmodel,@Header('Authorization')String token);
 }
